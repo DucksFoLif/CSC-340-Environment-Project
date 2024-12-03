@@ -1,8 +1,10 @@
 #include <iostream>
-#include "Driver.h"
+#include "Driver.cpp"
+#include "Environment.cpp"
 using namespace std;
 
 int main()
 {
-  initiateMenu();
+  Environment* defaultEnviro = new Environment("desert", 15, 0.0, 35.0);
+  //initiateMenu();
 }
