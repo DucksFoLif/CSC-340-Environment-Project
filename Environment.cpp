@@ -31,18 +31,21 @@ void Environment::dayPasses(bool print){ //very important function, split into 4
 
     //Phase 1: Environment Changes
     dayOfYear++;
+    
     if(dayOfYear > 60){ dayOfYear = 1; } //Resets year
+    
     if(dayOfYear < 8){ tempMin--; tempMax--; } //7 days, Beginning of winter, temp drops by 1 daily
-    if(dayOfYear > 8 && dayOfYear < 16){ tempMin++; tempMax++; } //7 days, Ending of winter, temp rises by 1 daily
-    if(dayOfYear > 15 && dayOfYear < 31){ tempMin += 0.5; tempMax += 0.5; } //15 days, Entirety of spring, temp raises by 0.5 daily
-    if(dayOfYear > 30 && dayOfYear < 38){ tempMin += 0.5; tempMax++; } //7 days, Beginning of summer, max temp raises by 1, min by 0.5
-    if(dayOfYear > 38 && dayOfYear < 46){ tempMin -= 0.5; tempMax--; } //7 days, End of summer, max temp decreases by 1, min by 0.5
-    if(dayOfYear > 45){ tempMin-= 0.5; tempMax-=0.5;} //15 days, Entirety of autumn, temp decreases by 0.5 daily
+    else if(dayOfYear > 8 && dayOfYear < 16){ tempMin++; tempMax++; } //7 days, Ending of winter, temp rises by 1 daily
+    else if(dayOfYear > 15 && dayOfYear < 31){ tempMin += 0.5; tempMax += 0.5; } //15 days, Entirety of spring, temp raises by 0.5 daily
+    else if(dayOfYear > 30 && dayOfYear < 38){ tempMin += 0.5; tempMax++; } //7 days, Beginning of summer, max temp raises by 1, min by 0.5
+    else if(dayOfYear > 38 && dayOfYear < 46){ tempMin -= 0.5; tempMax--; } //7 days, End of summer, max temp decreases by 1, min by 0.5
+    else if(dayOfYear > 45){ tempMin-= 0.5; tempMax-=0.5;} //15 days, Entirety of autumn, temp decreases by 0.5 daily
     //god i wish you could do ranges for switch statements it would be so awesome it would be so cool
     //you can if you hate time! or you could use inline assembly (I think)
 
 
     //Phase 2: Grazing Phase
+    
     
 
     //Phase 3: Hunting Phase
