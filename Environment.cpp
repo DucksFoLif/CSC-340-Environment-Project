@@ -72,5 +72,7 @@ void Environment::printSummary()
 {
   for (int i = 0; i < 20; i++) cout <<"-";
   cout <<"\nThe current day is: " << this -> getCurrentDayOfYear() << "\n";
+  
+  //FIX ME
 }
 
