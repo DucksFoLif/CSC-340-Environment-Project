@@ -1,7 +1,7 @@
-#include "Environment.h"
 #include <iostream>
+#include "Environment.h"
 
-using namespace std;
+using namespace std; //thank you 
 
 /*std::string name; //"desert" "forest" etc.
         int dayOfYear; //1-120 (30/season)
@@ -14,7 +14,7 @@ using namespace std;
 Environment::Environment() : name("default environment"), dayOfYear(15), maxFoodLevel(50), currentFoodLevel(maxFoodLevel),
 naturalCamo(0), tempMin(0), tempMax(10) {}
 
-Environment::Environment(string templateId){} //write later to take string from a predetermined .txt file and use that 
+// Environment::Environment(string templateId){} //write later to take string from a predetermined .txt file and use that 
 
 Environment::Environment(std::string environmentType, int foodLevel, double tempMin, double tempMax){
     name = environmentType;
@@ -39,9 +39,11 @@ void Environment::dayPasses(bool print){ //very important function, split into 4
     if(dayOfYear > 38 && dayOfYear < 46){ tempMin -= 0.5; tempMax--; } //7 days, End of summer, max temp decreases by 1, min by 0.5
     if(dayOfYear > 45){ tempMin-= 0.5; tempMax-=0.5;} //15 days, Entirety of autumn, temp decreases by 0.5 daily
     //god i wish you could do ranges for switch statements it would be so awesome it would be so cool
+    //you can if you hate time! or you could use inline assembly (I think)
 
 
     //Phase 2: Grazing Phase
+    
 
     //Phase 3: Hunting Phase
 
@@ -59,5 +61,16 @@ double Environment::getCurrentFoodLevel() const{
 
 void Environment::subtractFoodLevel(double amount){
     this->currentFoodLevel = this->currentFoodLevel - amount;
+}
+
+int Environment::getCurrentDayOfYear() const
+{
+  return dayOfYear;
+}
+
+void Environment::printSummary()
+{
+  for (int i = 0; i < 20; i++) cout <<"-";
+  cout <<"\nThe current day is: " << this -> getCurrentDayOfYear() << "\n";
 }
 

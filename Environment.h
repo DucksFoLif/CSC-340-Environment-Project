@@ -16,13 +16,13 @@ class Environment{
 
     public:
         Environment();
-        Environment(std::string templateId);
+        // Environment(std::string templateId);
         Environment(std::string environmentType, int foodLevel, double tempMin, double tempMax);
         ~Environment();
-
         int getMaxFoodLevel() const;
         double getCurrentFoodLevel() const;
         void subtractFoodLevel(double amount);
+        int getCurrentDayOfYear() const;
         //not sure which other attributes we will need getters and setters for yet, perhaps add as needed
         
         void dayPasses(bool print); //basic method to iterate a day in the simulation
@@ -30,4 +30,4 @@ class Environment{
         //void addPopulation(Population pop); //add a new animal population (commented until population is created)
 };
 
-#endif
+#endif // ENVIONMENT_H

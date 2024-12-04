@@ -1,6 +1,6 @@
 #include <iostream>
-#include "Driver.cpp"
-#include "Environment.cpp"
+#include "Driver.h"
+#include "Environment.h"
 using namespace std;
 
 int main()
