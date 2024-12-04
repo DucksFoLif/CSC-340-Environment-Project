@@ -11,8 +11,15 @@ using namespace std; //thank you
         double tempMin; //celsius ish
         double tempMax; //celsius ish*/
 
-Environment::Environment() : name("default environment"), dayOfYear(15), maxFoodLevel(50), currentFoodLevel(maxFoodLevel),
-naturalCamo(0), tempMin(0), tempMax(10) {}
+Environment::Environment() {
+    this -> name = "default environment";
+    this -> dayOfYear = 15;
+    this -> maxFoodLevel = 50;
+    this -> currentFoodLevel = maxFoodLevel;
+    this -> naturalCamo = 0;
+    this -> tempMin = 0;
+    this -> tempMax = 10;
+}
 
 // Environment::Environment(string templateId){} //write later to take string from a predetermined .txt file and use that 
 
