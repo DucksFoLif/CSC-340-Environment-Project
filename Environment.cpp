@@ -11,18 +11,25 @@ using namespace std; //thank you
         double tempMin; //celsius ish
         double tempMax; //celsius ish*/
 
-Environment::Environment() : name("default environment"), dayOfYear(15), maxFoodLevel(50), currentFoodLevel(maxFoodLevel),
-naturalCamo(0), tempMin(0), tempMax(10) {}
+Environment::Environment() {
+    this -> name = "default environment";
+    this -> dayOfYear = 15;
+    this -> maxFoodLevel = 50;
+    this -> currentFoodLevel = maxFoodLevel;
+    this -> naturalCamo = 0;
+    this -> tempMin = 0;
+    this -> tempMax = 10;
+}
 
 // Environment::Environment(string templateId){} //write later to take string from a predetermined .txt file and use that 
 
 Environment::Environment(std::string environmentType, int foodLevel, double tempMin, double tempMax){
-    name = environmentType;
-    dayOfYear = 15;
-    maxFoodLevel = foodLevel;
-    currentFoodLevel = foodLevel;
-    tempMin = tempMin;
-    tempMax = tempMax;
+    this -> name = environmentType;
+    this -> dayOfYear = 15;
+    this -> maxFoodLevel = foodLevel;
+    this -> currentFoodLevel = foodLevel;
+    this -> tempMin = tempMin;
+    this -> tempMax = tempMax;
 }
 
 void Environment::dayPasses(bool print){ //very important function, split into 4 phases
@@ -31,13 +38,15 @@ void Environment::dayPasses(bool print){ //very important function, split into 4
 
     //Phase 1: Environment Changes
     dayOfYear++;
+    
     if(dayOfYear > 60){ dayOfYear = 1; } //Resets year
+    
     if(dayOfYear < 8){ tempMin--; tempMax--; } //7 days, Beginning of winter, temp drops by 1 daily
-    if(dayOfYear > 8 && dayOfYear < 16){ tempMin++; tempMax++; } //7 days, Ending of winter, temp rises by 1 daily
-    if(dayOfYear > 15 && dayOfYear < 31){ tempMin += 0.5; tempMax += 0.5; } //15 days, Entirety of spring, temp raises by 0.5 daily
-    if(dayOfYear > 30 && dayOfYear < 38){ tempMin += 0.5; tempMax++; } //7 days, Beginning of summer, max temp raises by 1, min by 0.5
-    if(dayOfYear > 38 && dayOfYear < 46){ tempMin -= 0.5; tempMax--; } //7 days, End of summer, max temp decreases by 1, min by 0.5
-    if(dayOfYear > 45){ tempMin-= 0.5; tempMax-=0.5;} //15 days, Entirety of autumn, temp decreases by 0.5 daily
+    else if(dayOfYear > 8 && dayOfYear < 16){ tempMin++; tempMax++; } //7 days, Ending of winter, temp rises by 1 daily
+    else if(dayOfYear > 15 && dayOfYear < 31){ tempMin += 0.5; tempMax += 0.5; } //15 days, Entirety of spring, temp raises by 0.5 daily
+    else if(dayOfYear > 30 && dayOfYear < 38){ tempMin += 0.5; tempMax++; } //7 days, Beginning of summer, max temp raises by 1, min by 0.5
+    else if(dayOfYear > 38 && dayOfYear < 46){ tempMin -= 0.5; tempMax--; } //7 days, End of summer, max temp decreases by 1, min by 0.5
+    else if(dayOfYear > 45){ tempMin-= 0.5; tempMax-=0.5;} //15 days, Entirety of autumn, temp decreases by 0.5 daily
     //god i wish you could do ranges for switch statements it would be so awesome it would be so cool
     //you can if you hate time! or you could use inline assembly (I think)
 
@@ -77,5 +86,7 @@ void Environment::printSummary()
 {
   for (int i = 0; i < 20; i++) cout <<"-";
   cout <<"\nThe current day is: " << this -> getCurrentDayOfYear() << "\n";
+  
+  //FIX ME
 }
 
