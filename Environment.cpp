@@ -43,9 +43,14 @@ void Environment::dayPasses(bool print){ //very important function, split into 4
 
 
     //Phase 2: Grazing Phase
+    //Part 1: Organize list based on priority
+    //Part 2: Run Individual grazing checks for each animal?
+    //Part 3: Decrement the food supply to reflect
     
-
     //Phase 3: Hunting Phase
+    //Part 1: Organize list based on priority
+    //Part 2: Figure out which animals are hungry
+    //Part 3: Run hunting checks for said animals
 
     //Phase 4: Breeding Phase
 }
