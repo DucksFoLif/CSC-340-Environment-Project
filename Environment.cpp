@@ -24,12 +24,12 @@ Environment::Environment() {
 // Environment::Environment(string templateId){} //write later to take string from a predetermined .txt file and use that 
 
 Environment::Environment(std::string environmentType, int foodLevel, double tempMin, double tempMax){
-    name = environmentType;
-    dayOfYear = 15;
-    maxFoodLevel = foodLevel;
-    currentFoodLevel = foodLevel;
-    tempMin = tempMin;
-    tempMax = tempMax;
+    this -> name = environmentType;
+    this -> dayOfYear = 15;
+    this -> maxFoodLevel = foodLevel;
+    this -> currentFoodLevel = foodLevel;
+    this -> tempMin = tempMin;
+    this -> tempMax = tempMax;
 }
 
 void Environment::dayPasses(bool print){ //very important function, split into 4 phases
@@ -52,6 +52,7 @@ void Environment::dayPasses(bool print){ //very important function, split into 4
 
 
     //Phase 2: Grazing Phase
+    
     
     
 
