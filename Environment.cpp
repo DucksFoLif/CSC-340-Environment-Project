@@ -62,6 +62,11 @@ void Environment::dayPasses(bool print){ //very important function, split into 4
     //Part 3: Run hunting checks for said animals
 
     //Phase 4: Breeding Phase
+    
+    if (print == true)
+    {
+      this -> printSummary();
+    }
 }
 
 
