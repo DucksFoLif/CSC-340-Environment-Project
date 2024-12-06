@@ -91,7 +91,8 @@ void Environment::printSummary()
 {
   for (int i = 0; i < 20; i++) cout <<"-";
   cout <<"\nThe current day is: " << this -> getCurrentDayOfYear() << "\n";
-  
+  //Add the current min and max temperature
+  for (int i = 0; i < 20; i++) cout <<"-";
   //FIX ME
 }
 
