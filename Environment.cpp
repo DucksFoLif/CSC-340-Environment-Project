@@ -40,16 +40,17 @@ void Environment::dayPasses(bool print){ //very important function, split into 4
     dayOfYear++;
     
     if(dayOfYear > 60){ dayOfYear = 1; } //Resets year
-    
-    if(dayOfYear < 8){ tempMin--; tempMax--; } //7 days, Beginning of winter, temp drops by 1 daily
-    else if(dayOfYear > 8 && dayOfYear < 16){ tempMin++; tempMax++; } //7 days, Ending of winter, temp rises by 1 daily
-    else if(dayOfYear > 15 && dayOfYear < 31){ tempMin += 0.5; tempMax += 0.5; } //15 days, Entirety of spring, temp raises by 0.5 daily
-    else if(dayOfYear > 30 && dayOfYear < 38){ tempMin += 0.5; tempMax++; } //7 days, Beginning of summer, max temp raises by 1, min by 0.5
-    else if(dayOfYear > 38 && dayOfYear < 46){ tempMin -= 0.5; tempMax--; } //7 days, End of summer, max temp decreases by 1, min by 0.5
-    else if(dayOfYear > 45){ tempMin-= 0.5; tempMax-=0.5;} //15 days, Entirety of autumn, temp decreases by 0.5 daily
-    //god i wish you could do ranges for switch statements it would be so awesome it would be so cool
-    //you can if you hate time! or you could use inline assembly (I think)
 
+    string season = parseSeason(dayOfYear);
+
+    if(season == "Early Winter"){tempMin--; tempMax--;} //early winter decreases both by 1 per day
+    //Mid Winter does not incriment temperature
+    if(season == "Late Winter"){tempMin++; tempMax++;} //late winter increases both by 1 per day
+    if(season == "Spring"){tempMin+=0.5; tempMax+=0.5;} //spring increases both by 0.5 per day
+    if(season == "Early Summer"){tempMax++; tempMin+=0.5;} //early summer increases max by 1 and min by 0.5 per day
+    //Mid Summer does not incriment temperature
+    if(season == "Late Summer"){tempMax--; tempMin-=0.5;} //late summer decreases max by 1 and min by 0.5 per day
+    if(season == "Autumn"){tempMax-=0.5; tempMin-=0.5;} //autumn decreases both by 0.5 per day
 
     //Phase 2: Grazing Phase
     //Part 1: Organize list based on priority
@@ -91,8 +92,22 @@ void Environment::printSummary()
 {
   for (int i = 0; i < 20; i++) cout <<"-";
   cout <<"\nThe current day is: " << this -> getCurrentDayOfYear() << "\n";
-  //Add the current min and max temperature
+  cout << "The current min temperature is: " << tempMin << "\n";
+  cout << "The current max temperature is: " << tempMax << "\n";
+  //Eventually will add the population of certain animals
   for (int i = 0; i < 20; i++) cout <<"-";
+  cout << endl;
   //FIX ME
 }
 
+string Environment::parseSeason(int dayOfYear){
+  if(dayOfYear < 7){return "Early Winter";} //Days 1-6
+    else if(dayOfYear > 6 && dayOfYear < 10){return "Mid Winter";} //Days 7-9
+    else if(dayOfYear > 9 && dayOfYear < 16){return "Late Winter";} //Days 10-15
+    else if(dayOfYear > 15 && dayOfYear < 31){return "Spring";} //Days 16-30
+    else if(dayOfYear > 30 && dayOfYear < 37){return "Early Summer";} //Days 31-36
+    else if(dayOfYear > 36 && dayOfYear < 40){return "Mid Summer";} //Days 37-39
+    else if(dayOfYear > 39 && dayOfYear < 46){return "Late Summer";} //Days 40-45
+    else if(dayOfYear > 45){return "Autumn";} //Days 46-60
+
+}
