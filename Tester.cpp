@@ -26,29 +26,35 @@ void Tester::initiateTester()
 
     //display correctly copied values!
     cout << "\nInitial State of Environment:\n";
+    cout << "Expected: Day 15, Min Temp 0, Max Temp 35" << endl;
     test_environment->printSummary();
 
     //test getMaxFoodLevel()
     cout << "\nTesting getMaxFoodLevel():\n";
+    cout << "Expected: 15\n";
     cout << "Max Food Level: " << test_environment->getMaxFoodLevel() << "\n";
 
     //test getCurrentFoodLevel()
     cout << "\nTesting getCurrentFoodLevel():\n";
+    cout << "Expected: 15\n";
     cout << "Current Food Level: " << test_environment->getCurrentFoodLevel() << "\n";
 
     //test subtractFoodLevel()
     cout << "\nTesting subtractFoodLevel():\n";
     cout << "Subtracting 5.0 units of food...\n";
     test_environment->subtractFoodLevel(5.0);
+    cout << "Expected: 10\n";
     cout << "Current Food Level: " << test_environment->getCurrentFoodLevel() << "\n";
 
     //test dayPasses() with print enabled
     cout << "\nTesting dayPasses() with detailed output:\n";
+    cout << "Expected: Day 16, Min 0.5, Max 35.5\n";
     test_environment->dayPasses(true);
     
     //test parseSeason()
     cout << "\nTesting parseSeason():\n";
     int testDay = 10;
+    cout << "Expected: Late Winter\n";
     cout << "Season on day " << testDay << ": " << Environment::parseSeason(testDay) << "\n";
 
     //test advancing multiple days
@@ -57,6 +63,15 @@ void Tester::initiateTester()
         test_environment->dayPasses(false); // Advance a day without printing
     }
     cout << "State after advancing 5 days:\n";
+    cout << "Expected: Day 21, Min 3, Max 38\n";
+    test_environment->printSummary();
+
+    //test advancing one year
+    cout << "\nTesting advancing one year:\n";
+    cout << "Expected: Day 21, Min 3, Max 38\n";
+    for(int i = 0; i < 60; i++){
+        test_environment->dayPasses(false);
+    }
     test_environment->printSummary();
 
     //everything after this should be after test functions have finished, execution can leave this function but should return back 
