@@ -66,3 +66,15 @@ void Driver::startTester()
     delete tester;
     cout << "Ended Testing!\n";
 }
+
+
+Environment* Driver::chooseEnvironment()
+{    
+    // finish this as an option
+    cout << "Choosing Environments is in the works. We will give you a desert environment to start." << endl;
+    Environment* returnEnvironment = new Environment("desert", 15, 0.0, 35.0);
+
+    return returnEnvironment;
+
+
+}

@@ -79,5 +79,5 @@ void Tester::initiateTester()
     //clean up memory
     delete test_environment;
 
-    cout << "Test has completed!\n";
+    cout << "Tests have been completed!\n";
 }
