@@ -2,10 +2,11 @@
 #include <string>
 #include "Driver.h"
 #include "Environment.h"
+#include "Tester.h"
 
 using namespace std;
 
-enum Options {QUIT, NEW_ENVIRO, SIMULATE, STATS};
+enum Options {QUIT, NEW_ENVIRO, SIMULATE, STATS,TESTER};
 
 void Driver::initiateMenu(Environment* Enviro){
     int input;
@@ -13,7 +14,9 @@ void Driver::initiateMenu(Environment* Enviro){
             "(" << QUIT << "): Quit the program.\n" <<
             "(" << NEW_ENVIRO << "): Load a new Environment.\n"
             "(" << SIMULATE << "): Simulate one or more days of the program.\n"
-            "(" << STATS << "): View Statistics about your simulation.\n" << endl;
+            "(" << STATS << "): View Statistics about your simulation.\n"
+            "(" << TESTER << "): Test Simulation behavior.\n" << endl;
+
     cin >> input;
     //print menu option and gather output
     Driver::parseMenuInput(Enviro, input);
@@ -41,8 +44,25 @@ void Driver::parseMenuInput(Environment* Enviro, int inp){
             //Show statistics about the environment (# of animals in each population, day of year, temperatures)
             cout << "Coming soon!" << endl;
             break;
+        case TESTER:
+            startTester();
+            break;
+
     }
     if(inp != QUIT){
         Driver::initiateMenu(Enviro);
     }
+	//if it reaches this point it should quit, so we gotta make sure we delete any dynamically allocated objects
+}
+
+void Driver::startTester()
+{
+    //initiate tester program
+    Tester *tester = new Tester;
+
+    cout << "Starting tester!\n";
+    tester -> initiateTester();
+
+    delete tester;
+    cout << "Ended Testing!\n";
 }

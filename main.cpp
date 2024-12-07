@@ -1,6 +1,8 @@
 #include <iostream>
 #include "Driver.h"
 #include "Environment.h"
+#include "Animal.h"
+#include "Tester.h"
 using namespace std;
 
 int main()

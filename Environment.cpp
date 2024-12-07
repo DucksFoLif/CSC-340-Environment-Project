@@ -23,7 +23,7 @@ Environment::Environment() {
 
 // Environment::Environment(string templateId){} //write later to take string from a predetermined .txt file and use that 
 
-Environment::Environment(std::string environmentType, int foodLevel, double tempMin, double tempMax){
+Environment::Environment(string environmentType, int foodLevel, double tempMin, double tempMax){
     this -> name = environmentType;
     this -> dayOfYear = 15;
     this -> maxFoodLevel = foodLevel;

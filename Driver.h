@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "Environment.h"
+#include "Driver.h"
 
 using namespace std;
 
@@ -13,6 +14,7 @@ class Driver
   public:
     static void initiateMenu(Environment* Enviro);
     static void parseMenuInput(Environment* Enviro, int inp);
+    static void startTester();
   
 };
 
