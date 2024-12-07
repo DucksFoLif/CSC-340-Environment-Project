@@ -32,6 +32,12 @@ Environment::Environment(string environmentType, int foodLevel, double tempMin, 
     this -> tempMax = tempMax;
 }
 
+Environment::~Environment()
+{
+  //eventually loop through and delete all animals
+
+}
+
 void Environment::dayPasses(bool print){ //very important function, split into 4 phases
     //Print parameter will print everything about the day, logs of everything that happen. Most useful when only iterating over 1 day
     //When iterating over multiple days at a time, print should be false

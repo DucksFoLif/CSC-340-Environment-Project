@@ -9,10 +9,7 @@ class Tester
 {
     public:
     void initiateTester();
-
-
-  
-  
+    
 };
 
 

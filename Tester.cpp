@@ -77,7 +77,7 @@ void Tester::initiateTester()
     //everything after this should be after test functions have finished, execution can leave this function but should return back 
 
     //clean up memory
-    //delete test_environment;
+    delete test_environment;
 
     cout << "Test has completed!\n";
 }
