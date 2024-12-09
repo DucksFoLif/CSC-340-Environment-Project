@@ -10,17 +10,16 @@ protected:
     int EPlevel;
     int hungerReq;
     std::string state;
+
+    //can be removed if we don't like it
+    unsigned short int* stats; // H,G,S
     
 
-
-
 public:
-    //Animal();
-    //virtual ~Animal();
+    Animal();
+    ~Animal();
 
 
-  
-  
 };
 
 
