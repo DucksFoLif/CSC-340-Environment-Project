@@ -100,7 +100,7 @@ void Environment::printSummary()
   cout <<"\nThe current day is: " << this -> getCurrentDayOfYear() << "\n";
   cout << "The current min temperature is: " << tempMin << "\n";
   cout << "The current max temperature is: " << tempMax << "\n";
-  //Eventually will add the population of certain animals
+  //Eventually will add the LinkedList of certain animals
   for (int i = 0; i < 20; i++) cout <<"-";
   cout << endl;
   //FIX ME
@@ -115,5 +115,6 @@ string Environment::parseSeason(int dayOfYear){
     else if(dayOfYear > 36 && dayOfYear < 40){return "Mid Summer";} //Days 37-39
     else if(dayOfYear > 39 && dayOfYear < 46){return "Late Summer";} //Days 40-45
     else if(dayOfYear > 45){return "Autumn";} //Days 46-60
+    return "You should never get this value";
 
 }
