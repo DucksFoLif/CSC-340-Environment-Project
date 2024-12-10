@@ -2,6 +2,7 @@
 #include <string>
 #include "Tester.h"
 #include "Environment.h"
+#include "Herbivore.h"
 using namespace std;
 
 void Tester::initiateTester()
@@ -20,6 +21,13 @@ void Tester::initiateTester()
 
     //creating the environment to test
      Environment* test_environment = new Environment(environmentType, foodLevel, tempMin, tempMax);
+
+     //create test animals in environment //CHANGE LATER BC THIS ISNT HOW ENVIRONMENTS WILL FUNCTION
+    int stats[4] = {0,128, 128, 128};
+    Herbivore *one = new Herbivore(stats);
+    Herbivore *two = new Herbivore(stats);
+
+
 
  //basically main
     //any functions in here should return here when finished and eventually complete this function ending the test

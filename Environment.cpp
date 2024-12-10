@@ -30,6 +30,15 @@ Environment::Environment(string environmentType, int foodLevel, double tempMin, 
     this -> currentFoodLevel = foodLevel;
     this -> tempMin = tempMin;
     this -> tempMax = tempMax;
+
+    //TEST DELETE LATER
+    {
+        int stats[4] = {0,128, 128, 128};
+        this -> one =  new Herbivore(stats);
+        this -> two = new Herbivore(stats);
+    }
+    //TEST DELETE LATER
+
 }
 
 Environment::~Environment()

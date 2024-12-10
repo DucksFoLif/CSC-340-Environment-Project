@@ -2,6 +2,7 @@
 #define NODE_H
 
 #include <string>
+#include "Herbivore.h"
 
 class Environment{
     private:
@@ -14,7 +15,14 @@ class Environment{
         double tempMin; //celsius ish
         double tempMax; //celsius ish
 
+        //create test animals in environment //CHANGE LATER BC THIS ISNT HOW ENVIRONMENTS WILL FUNCTION
+        
+        Herbivore *one;
+        Herbivore *two;
+        //TEST DELETE LATER
+
     public:
+
         Environment();
         // Environment(std::string templateId);
         Environment(std::string environmentType, int foodLevel, double tempMin, double tempMax);
