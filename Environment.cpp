@@ -68,6 +68,19 @@ void Environment::dayPasses(bool print){ //very important function, split into 4
     if(season == "Autumn"){tempMax-=0.5; tempMin-=0.5;} //autumn decreases both by 0.5 per day
 
     //Phase 2: Grazing Phase
+
+    //TEST DELETE LATER
+    //animals eat
+    setCurrentFoodLevel(one -> eat(getCurrentFoodLevel()));
+    setCurrentFoodLevel(two -> eat(getCurrentFoodLevel()));
+
+    //food replenishes
+    if ((getCurrentFoodLevel() * 1.4 + 10) < getMaxFoodLevel()) setCurrentFoodLevel(getCurrentFoodLevel() *1.5 + 20);
+    else setCurrentFoodLevel(getMaxFoodLevel()); 
+    
+    //TEST DELETE LATER
+
+
     //Part 1: Organize list based on priority
     //Part 2: Run Individual grazing checks for each animal?
     //Part 3: Decrement the food supply to reflect
@@ -88,6 +101,11 @@ void Environment::dayPasses(bool print){ //very important function, split into 4
 
 int Environment::getMaxFoodLevel() const{
     return maxFoodLevel;
+}
+
+void Environment::setCurrentFoodLevel(double newLevel)
+{
+  this -> currentFoodLevel = newLevel;
 }
 
 double Environment::getCurrentFoodLevel() const{

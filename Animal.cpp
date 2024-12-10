@@ -46,6 +46,9 @@ Animal::Animal(const int *given_stats)
     this -> stats[2] = given_stats[3];  // Intelligence
     this -> stats[3] = given_stats[4];  // Appeal
 
+    //setting hunger stats
+    hunger = 50; fullness = 50;
+
     /*
     //determining sex
     if (std::time(nullptr) % 2 == 0)

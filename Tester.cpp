@@ -20,12 +20,9 @@ void Tester::initiateTester()
     cout << "Temperature Range: " << tempMin << " to " << tempMax << " degrees Celsius\n";
 
     //creating the environment to test
-     Environment* test_environment = new Environment(environmentType, foodLevel, tempMin, tempMax);
+    Environment* test_environment = new Environment(environmentType, foodLevel, tempMin, tempMax);
 
-     //create test animals in environment //CHANGE LATER BC THIS ISNT HOW ENVIRONMENTS WILL FUNCTION
-    int stats[4] = {0,128, 128, 128};
-    Herbivore *one = new Herbivore(stats);
-    Herbivore *two = new Herbivore(stats);
+    
 
 
 
@@ -58,7 +55,12 @@ void Tester::initiateTester()
     cout << "\nTesting dayPasses() with detailed output:\n";
     cout << "Expected: Day 16, Min 0.5, Max 35.5\n";
     test_environment->dayPasses(true);
-    
+
+    //test getCurrentFoodLevel()
+    cout << "\nTesting getCurrentFoodLevel():\n";
+    cout << "No Expected Value\n";
+    cout << "Current Food Level: " << test_environment->getCurrentFoodLevel() << "\n";
+
     //test parseSeason()
     cout << "\nTesting parseSeason():\n";
     int testDay = 10;

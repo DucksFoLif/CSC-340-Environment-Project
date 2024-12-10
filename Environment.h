@@ -28,6 +28,7 @@ class Environment{
         Environment(std::string environmentType, int foodLevel, double tempMin, double tempMax);
         ~Environment();
         int getMaxFoodLevel() const;
+        void setCurrentFoodLevel(double newLevel);
         double getCurrentFoodLevel() const;
         void subtractFoodLevel(double amount);
         int getCurrentDayOfYear() const;
