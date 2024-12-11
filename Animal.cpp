@@ -8,7 +8,7 @@
 
 using namespace std;
 
-const int MAX_STAT_SIZE = 5 ;
+const int MAX_STAT_SIZE = 5;
 
 
 Animal::Animal()

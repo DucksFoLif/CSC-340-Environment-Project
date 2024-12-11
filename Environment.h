@@ -33,7 +33,7 @@ class Environment{
         double getCurrentFoodLevel() const;
         void subtractFoodLevel(double amount);
         int getCurrentDayOfYear() const;
-        void addPopulation(string& speciesName, int numToAdd, int* givenStats);
+        void addPopulation(std::string& speciesName, int numToAdd, int* givenStats);
         //not sure which other attributes we will need getters and setters for yet, perhaps add as needed
         
         void dayPasses(bool print); //basic method to iterate a day in the simulation

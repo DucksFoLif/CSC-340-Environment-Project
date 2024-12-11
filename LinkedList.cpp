@@ -48,27 +48,44 @@ string LinkedList::getSpeciesName() const{
     return speciesName;
 }
 
-void LinkedList::addAnimal(Animal* animal){
+void LinkedList::addAnimal(Animal* animal) {
     Node* temp = head;
     Node* newNode = new Node(animal);
-    while(temp){
-        if(animal->getEatSkill() <= temp->getData()->getEatSkill()){
-            if(temp == head){
+
+    while (temp) {
+        if (animal->getEatSkill() <= temp->getData()->getEatSkill()) {
+            if (temp == head) {
                 newNode->setNext(head);
                 head->setPrev(newNode);
                 head = newNode;
-            }
-            else{
+            } else {
                 Node* prevNode = temp->getPrev();
                 newNode->setNext(temp);
                 newNode->setPrev(prevNode);
                 if (prevNode) prevNode->setNext(newNode);
                 temp->setPrev(newNode);
             }
+            return;  // Stop after inserting
+        }
+        temp = temp->getNext();
+    }
+
+    // Append at the end if no suitable position was found
+    if (!temp) {
+        if (!head) {
+            // If the list is empty
+            head = newNode;
+        } else {
+            Node* tail = head;
+            while (tail->getNext()) {
+                tail = tail->getNext();
+            }
+            tail->setNext(newNode);
+            newNode->setPrev(tail);
         }
     }
-    temp = temp->getNext();
 }
+
 
 void LinkedList::removeAnimal(Animal* animal){
     Node* temp = head;

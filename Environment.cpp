@@ -80,6 +80,10 @@ void Environment::dayPasses(bool print){ //very important function, split into 4
     else setCurrentFoodLevel(getMaxFoodLevel()); 
     
     //TEST DELETE LATER
+    //Part 1: Organize list based on priority
+  
+
+
     //Part 2: Run Individual grazing checks for each animal?
     //Part 3: Decrement the food supply to reflect
     
@@ -143,13 +147,14 @@ string Environment::parseSeason(int dayOfYear){
     else if(dayOfYear > 39 && dayOfYear < 46){return "Late Summer";} //Days 40-45
     else if(dayOfYear > 45){return "Autumn";} //Days 46-60
     return "You should never get this value";
-
 }
 
 void Environment::addPopulation(string& speciesName, int numToAdd, int* givenStats){
   population = new LinkedList(speciesName);
-  for(int i = 0; i < numToAdd; i++){
-    Animal* ani = new Animal(givenStats);
+
+  Animal* ani = nullptr;
+  for(int i = 1; i < numToAdd; i++){
+    ani = new Animal(givenStats);
     population->addAnimal(ani);
   }
 }

@@ -15,11 +15,12 @@ int main()
           "To get Started, let's choose what type of environment you want your first animals to live in:" << endl;
   
   Environment* chosen_environment = Driver::chooseEnvironment();
+
   int defaultStats[] = {0, 128, 128, 128, 128};
 
   //change later to let the user choose from a list
   string animalName = "Deer";
-  chosen_environment->addPopulation(animalName, 3, defaultStats);
+  chosen_environment -> addPopulation(animalName, 3, defaultStats);
 
   Driver::initiateMenu(chosen_environment);
 }
