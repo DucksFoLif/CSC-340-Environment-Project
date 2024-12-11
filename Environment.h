@@ -6,7 +6,7 @@
 
 class Environment{
     private:
-        //Population[] popArr (i forget the syntax for arrays)
+        //LinkedList[] popArr (i forget the syntax for arrays)
         std::string name; //"desert" "forest" etc.
         int dayOfYear; //1-120 (30/season)
         int maxFoodLevel; //1-100
@@ -35,9 +35,9 @@ class Environment{
         //not sure which other attributes we will need getters and setters for yet, perhaps add as needed
         
         void dayPasses(bool print); //basic method to iterate a day in the simulation
-        void printSummary(); //prints day of year, temp, summary of animal populations
+        void printSummary(); //prints day of year, temp, summary of animal LinkedLists
         static std::string parseSeason(int dayOfYear); //takes a number and returns a season
-        //void addPopulation(Population pop); //add a new animal population (commented until population is created)
+        //void addLinkedList(LinkedList pop); //add a new animal LinkedList (commented until LinkedList is created)
 };
 
 #endif // ENVIONMENT_H

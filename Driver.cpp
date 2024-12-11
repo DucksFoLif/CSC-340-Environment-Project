@@ -6,7 +6,7 @@
 
 using namespace std;
 
-enum Options {QUIT, NEW_ENVIRO, SIMULATE, STATS,TESTER};
+enum Options {QUIT = 0, NEW_ENVIRO, SIMULATE, STATS, TESTER};
 
 void Driver::initiateMenu(Environment* Enviro){
     int input;
@@ -41,7 +41,7 @@ void Driver::parseMenuInput(Environment* Enviro, int inp){
             //Eventually add a function that asks the user how many days to run, and then runs that many days
             break;
         case STATS:
-            //Show statistics about the environment (# of animals in each population, day of year, temperatures)
+            //Show statistics about the environment (# of animals in each LinkedList, day of year, temperatures)
             cout << "Coming soon!" << endl;
             break;
         case TESTER:
