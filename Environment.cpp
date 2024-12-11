@@ -20,6 +20,8 @@ Environment::Environment() {
     this -> naturalCamo = 0;
     this -> tempMin = 0;
     this -> tempMax = 10;
+
+    this -> population = new LinkedList();
 }
 
 // Environment::Environment(string templateId){} //write later to take string from a predetermined .txt file and use that 
@@ -32,12 +34,17 @@ Environment::Environment(string environmentType, int foodLevel, double tempMin, 
     this -> tempMin = tempMin;
     this -> tempMax = tempMax;
 
+    this -> population = new LinkedList("Herbivore");
+
     //TEST DELETE LATER
     {
         int stats[5] = {0,128, 128, 128, 128};
         this -> one =  new Herbivore(stats);
         this -> two = new Herbivore(stats);
     }
+
+    population -> addAnimal(one);
+    population -> addAnimal(two);
     //TEST DELETE LATER
 
 }
@@ -131,7 +138,7 @@ void Environment::printSummary()
   cout << "The current max temperature is: " << tempMax << "\n";
   //Eventually will add the LinkedList of certain animals
   cout << "\n The current animals in the environment are: \n";
-  cout << population->getSize() << " " << population->getSpeciesName() << endl;
+  cout << (this -> population) -> getSize() << " " << (this -> population)->getSpeciesName() << endl;
   for (int i = 0; i < 20; i++) cout <<"-";
   cout << endl;
   //FIX ME
