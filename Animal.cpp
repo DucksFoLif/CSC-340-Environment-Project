@@ -3,7 +3,7 @@
 #include <ctime>
 #include <stdlib.h> //rand
 
-#include "Environment.h"
+//#include "Environment.h"
 #include "Animal.h"
 
 using namespace std;
@@ -87,9 +87,22 @@ void Animal::setFullness(double newFullness)
 Animal* Animal::reproduce(){
     int newStats[MAX_STAT_SIZE];
     int randNum = rand() % 4;
-    for(int i = 0; i < randNum; i++){
-        newStats[rand() % (MAX_STAT_SIZE-1) + 1]--;
-        newStats[rand() % (MAX_STAT_SIZE-1) + 1]++;
+    for (int i = 0; i < MAX_STAT_SIZE; i++) {
+        newStats[i] = stats[i]; // Assuming `stats` is the parent's stats array.
+    }
+    for (int i = 0; i < randNum; i++) {
+        int decreaseIndex = rand() % MAX_STAT_SIZE;
+        int increaseIndex = rand() % MAX_STAT_SIZE;
+
+        // Ensure we do not decrease below zero or increase above 256
+        if (newStats[decreaseIndex] > 0) {
+            newStats[decreaseIndex]--;
+            if (newStats[increaseIndex] < 255) {
+                newStats[increaseIndex]++;
+            } else {
+                newStats[decreaseIndex]++; // Revert decrease if increase can't happen.
+            }
+        }
     }
     Animal* newAni = new Animal(newStats);
     return newAni;

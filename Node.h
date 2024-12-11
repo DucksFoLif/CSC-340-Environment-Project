@@ -3,6 +3,7 @@
 
 #include <string>
 #include "Animal.h"
+#include "Herbivore.h"
 
 class Node {
 private:

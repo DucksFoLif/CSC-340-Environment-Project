@@ -45,10 +45,22 @@ int LinkedList::getSize(){
 
 void LinkedList::addAnimal(Animal* animal){
     Node* temp = head;
+    Node* newNode = new Node(animal);
     while(temp){
-        //if animal eating stat <= temp eating stat
-            //add it into the array
-            return;
+        if(animal->getEatSkill() <= temp->getData()->getEatSkill()){
+            if(temp == head){
+                newNode->setNext(head);
+                head->setPrev(newNode);
+                head = newNode;
+            }
+            else{
+                Node* prevNode = temp->getPrev();
+                newNode->setNext(temp);
+                newNode->setPrev(prevNode);
+                if (prevNode) prevNode->setNext(newNode);
+                temp->setPrev(newNode);
+            }
+        }
     }
     temp = temp->getNext();
 }

@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Environment.h"
+#include "Node.h"
 
 using namespace std; //thank you 
 
@@ -33,7 +34,7 @@ Environment::Environment(string environmentType, int foodLevel, double tempMin, 
 
     //TEST DELETE LATER
     {
-        int stats[4] = {0,128, 128, 128};
+        int stats[5] = {0,128, 128, 128, 128};
         this -> one =  new Herbivore(stats);
         this -> two = new Herbivore(stats);
     }
@@ -80,8 +81,6 @@ void Environment::dayPasses(bool print){ //very important function, split into 4
     
     //TEST DELETE LATER
 
-
-    //Part 1: Organize list based on priority
     //Part 2: Run Individual grazing checks for each animal?
     //Part 3: Decrement the food supply to reflect
     
@@ -144,4 +143,12 @@ string Environment::parseSeason(int dayOfYear){
     else if(dayOfYear > 45){return "Autumn";} //Days 46-60
     return "You should never get this value";
 
+}
+
+void Environment::addPopulation(int numToAdd, int* givenStats){
+  population = new LinkedList();
+  for(int i = 0; i < numToAdd; i++){
+    Animal* ani = new Animal(givenStats);
+    population->addAnimal(ani);
+  }
 }

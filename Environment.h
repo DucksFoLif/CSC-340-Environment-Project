@@ -3,10 +3,11 @@
 
 #include <string>
 #include "Herbivore.h"
+#include "LinkedList.h"
 
 class Environment{
     private:
-        //LinkedList[] popArr (i forget the syntax for arrays)
+        LinkedList* population;
         std::string name; //"desert" "forest" etc.
         int dayOfYear; //1-120 (30/season)
         int maxFoodLevel; //1-100
@@ -32,6 +33,7 @@ class Environment{
         double getCurrentFoodLevel() const;
         void subtractFoodLevel(double amount);
         int getCurrentDayOfYear() const;
+        void addPopulation(int numToAdd, int* givenStats);
         //not sure which other attributes we will need getters and setters for yet, perhaps add as needed
         
         void dayPasses(bool print); //basic method to iterate a day in the simulation

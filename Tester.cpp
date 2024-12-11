@@ -84,6 +84,7 @@ void Tester::initiateTester()
     }
     test_environment->printSummary();
 
+
     //everything after this should be after test functions have finished, execution can leave this function but should return back 
 
     //clean up memory

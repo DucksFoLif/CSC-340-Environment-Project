@@ -6,14 +6,15 @@
 
 using namespace std;
 
-enum Options {QUIT = 0, NEW_ENVIRO, SIMULATE, STATS, ADD_ANIMAL, TESTER};
+enum Options {QUIT = 0, NEW_ENVIRO, SIMULATE, YEAR, STATS, ADD_ANIMAL, TESTER};
 
 void Driver::initiateMenu(Environment* Enviro){
     int input;
     cout << "Choose an option:\n" << 
             "(" << QUIT << "): Quit the program.\n" <<
             "(" << NEW_ENVIRO << "): Load a new Environment.\n"
-            "(" << SIMULATE << "): Simulate one or more days of the program.\n"
+            "(" << SIMULATE << "): Simulate one day of the program.\n"
+            "(" << YEAR << "): Simulate one year (60 days) of the program.\n"
             "(" << STATS << "): View Statistics about your simulation.\n"
             "(" << ADD_ANIMAL << "): Add An Animal Species to the environment.\n"
             "(" << TESTER << "): Test Simulation behavior.\n" << endl;
@@ -40,6 +41,11 @@ void Driver::parseMenuInput(Environment* Enviro, int inp){
         case SIMULATE:
             Enviro->dayPasses(true);
             //Eventually add a function that asks the user how many days to run, and then runs that many days
+            break;
+        case YEAR:
+            for(int i = 0; i < 60; i++){
+                Enviro->dayPasses(false);
+            }
             break;
         case STATS:
             //Show statistics about the environment (# of animals in each LinkedList, day of year, temperatures)
