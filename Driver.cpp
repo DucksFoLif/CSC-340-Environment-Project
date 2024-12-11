@@ -6,7 +6,7 @@
 
 using namespace std;
 
-enum Options {QUIT = 0, NEW_ENVIRO, SIMULATE, STATS, TESTER};
+enum Options {QUIT = 0, NEW_ENVIRO, SIMULATE, STATS, TESTER, ADD_NEW_SPECIES};
 
 void Driver::initiateMenu(Environment* Enviro){
     int input;
@@ -48,6 +48,10 @@ void Driver::parseMenuInput(Environment* Enviro, int inp){
             startTester();
             break;
 
+        case ADD_NEW_SPECIES:
+            initiateAddNewSpecies();
+            break;
+
     }
     if(inp != QUIT){
         Driver::initiateMenu(Enviro);
@@ -77,4 +81,10 @@ Environment* Driver::chooseEnvironment()
     return returnEnvironment;
 
 
+}
+
+
+void Driver::initiateAddNewSpecies()
+{
+    Enviro -> addNewSpecies();
 }

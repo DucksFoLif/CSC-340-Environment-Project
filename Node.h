@@ -15,7 +15,7 @@ public:
     Node();
     ~Node();
     Animal* getData() const;
-    void setData(Animal* data);
+    void setData(Animal* newdata);
     Node* getNext() const;
     void setNext(Node* nextNode);
     Node* getPrev() const;

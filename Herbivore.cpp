@@ -15,7 +15,7 @@ Herbivore::Herbivore() : Animal()
 
 Herbivore::Herbivore(int *given_stats) : Animal(given_stats)
 {
-    
+
     
 }
 
@@ -39,8 +39,6 @@ double Herbivore::eat(double foodLeft)
     //calculate potential hunger and fullness values
     //double potential_fullness = this -> getFullness() + animalWant;
     //double potential_hunger = this ->getHunger() - animalWant;
-
-    cout << "I didn't eat yet!" << foodLeft<< endl;
 
     // change value and finish eating
     if(animalWant < foodLeft)// if there is enough food for the animal to eat and have some left over
@@ -86,8 +84,6 @@ double Herbivore::eat(double foodLeft)
 
     }
    }
-
-   cout << "I ate!" << foodLeft<< endl;
    //return changes to environment
     return foodLeft;
 }

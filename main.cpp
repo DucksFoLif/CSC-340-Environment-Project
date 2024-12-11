@@ -3,6 +3,7 @@
 #include "Environment.h"
 #include "Animal.h"
 #include "Tester.h"
+#include "Node.h"
 #include "LinkedList.h"
 using namespace std;
 
