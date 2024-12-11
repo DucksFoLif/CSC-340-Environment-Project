@@ -16,6 +16,7 @@ class Driver
     static void parseMenuInput(Environment* Enviro, int inp);
     static void startTester();
     static Environment* chooseEnvironment();
+    static void initiateAddNewSpecies(Environment* Enviro);
   
 };
 

@@ -49,7 +49,7 @@ void Driver::parseMenuInput(Environment* Enviro, int inp){
             break;
 
         case ADD_NEW_SPECIES:
-            initiateAddNewSpecies();
+            Driver::initiateAddNewSpecies(Enviro);
             break;
 
     }
@@ -84,7 +84,7 @@ Environment* Driver::chooseEnvironment()
 }
 
 
-void Driver::initiateAddNewSpecies()
+void Driver::initiateAddNewSpecies(Environment* Enviro)
 {
-    Enviro -> addNewSpecies();
+    //Enviro -> addNewSpecies();
 }
