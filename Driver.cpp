@@ -6,7 +6,7 @@
 
 using namespace std;
 
-enum Options {QUIT = 0, NEW_ENVIRO, SIMULATE, STATS, TESTER};
+enum Options {QUIT = 0, NEW_ENVIRO, SIMULATE, STATS, ADD_ANIMAL, TESTER};
 
 void Driver::initiateMenu(Environment* Enviro){
     int input;
@@ -15,6 +15,7 @@ void Driver::initiateMenu(Environment* Enviro){
             "(" << NEW_ENVIRO << "): Load a new Environment.\n"
             "(" << SIMULATE << "): Simulate one or more days of the program.\n"
             "(" << STATS << "): View Statistics about your simulation.\n"
+            "(" << ADD_ANIMAL << "): Add An Animal Species to the environment.\n"
             "(" << TESTER << "): Test Simulation behavior.\n" << endl;
 
     cin >> input;
@@ -42,6 +43,10 @@ void Driver::parseMenuInput(Environment* Enviro, int inp){
             break;
         case STATS:
             //Show statistics about the environment (# of animals in each LinkedList, day of year, temperatures)
+            cout << "Coming soon!" << endl;
+            break;
+        case ADD_ANIMAL:
+            //need to make the .csv, and add the function to read in from it
             cout << "Coming soon!" << endl;
             break;
         case TESTER:

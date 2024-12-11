@@ -1,13 +1,14 @@
 #include <iostream>
 #include <string>
 #include <ctime>
+#include <stdlib.h> //rand
 
 #include "Environment.h"
 #include "Animal.h"
 
 using namespace std;
 
-const int MAX_STAT_SIZE = 4 ;
+const int MAX_STAT_SIZE = 5 ;
 
 
 Animal::Animal()
@@ -40,11 +41,11 @@ Animal::Animal(const int *given_stats)
     //declaring an array of MAX_STAT_SIZE
     this -> stats = new short unsigned int[MAX_STAT_SIZE];
 
-    //first stat is the type of animal so skip it
-    this -> stats[0] = given_stats[1];  // Stealth/Evasion
-    this -> stats[1] = given_stats[2];  // Eating
-    this -> stats[2] = given_stats[3];  // Intelligence
-    this -> stats[3] = given_stats[4];  // Appeal
+    this -> stats[0] = given_stats[0];  //Herbivore/carnivore
+    this -> stats[1] = given_stats[1];  // Stealth/Evasion
+    this -> stats[2] = given_stats[2];  // Eating
+    this -> stats[3] = given_stats[3];  // Intelligence
+    this -> stats[4] = given_stats[4];  // Appeal
 
     //setting hunger stats
     hunger = 50; fullness = 50;
@@ -68,7 +69,7 @@ Animal::~Animal()
 
 
 int Animal::getEatSkill()
-{return (this -> stats)[1];}
+{return (this -> stats)[2];}
 
 
 double Animal::getHunger()
@@ -81,3 +82,15 @@ void Animal::setHunger(double newHunger)
 {this -> hunger = newHunger;}
 void Animal::setFullness(double newFullness)
 {this -> fullness = newFullness;}
+
+
+Animal* Animal::reproduce(){
+    int newStats[MAX_STAT_SIZE];
+    int randNum = rand() % 4;
+    for(int i = 0; i < randNum; i++){
+        newStats[rand() % (MAX_STAT_SIZE-1) + 1]--;
+        newStats[rand() % (MAX_STAT_SIZE-1) + 1]++;
+    }
+    Animal* newAni = new Animal(newStats);
+    return newAni;
+}

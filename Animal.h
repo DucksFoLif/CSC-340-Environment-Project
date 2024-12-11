@@ -43,6 +43,9 @@ public:
     void setHunger(double newHunger);
     void setFullness(double newFullness);
 
+    //reproduction
+    Animal* reproduce();
+
     
 };
 
