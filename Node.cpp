@@ -19,8 +19,8 @@ Animal* Node::getData() const {
     return data;
 }
 
-void Node::setData(Animal* data) {
-    data = data;
+void Node::setData(Animal* newdata) {
+    this -> data = newdata;
 }
 
 Node* Node::getNext() const {

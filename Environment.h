@@ -39,6 +39,7 @@ class Environment{
         void dayPasses(bool print); //basic method to iterate a day in the simulation
         void printSummary(); //prints day of year, temp, summary of animal LinkedLists
         static std::string parseSeason(int dayOfYear); //takes a number and returns a season
+        void findPriorityToEat();
         //void addLinkedList(LinkedList pop); //add a new animal LinkedList (commented until LinkedList is created)
 };
 

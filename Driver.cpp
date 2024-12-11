@@ -54,6 +54,7 @@ void Driver::parseMenuInput(Environment* Enviro, int inp){
         case ADD_ANIMAL:
             //need to make the .csv, and add the function to read in from it
             cout << "Coming soon!" << endl;
+            Driver::initiateAddNewSpecies(Enviro);
             break;
         case TESTER:
             startTester();
@@ -88,4 +89,10 @@ Environment* Driver::chooseEnvironment()
     return returnEnvironment;
 
 
+}
+
+
+void Driver::initiateAddNewSpecies(Environment* Enviro)
+{
+    //Enviro -> addPopulation();
 }

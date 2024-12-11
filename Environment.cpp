@@ -80,7 +80,6 @@ void Environment::dayPasses(bool print){ //very important function, split into 4
     else setCurrentFoodLevel(getMaxFoodLevel()); 
     
     //TEST DELETE LATER
-
     //Part 2: Run Individual grazing checks for each animal?
     //Part 3: Decrement the food supply to reflect
     
