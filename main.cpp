@@ -7,7 +7,7 @@
 #include "LinkedList.h"
 using namespace std;
 
-//cl Main.cpp LinkedList.cpp Environment.cpp Tester.cpp Node.cpp Animal.cpp Driver.cpp
+//cl Main.cpp LinkedList.cpp Environment.cpp Tester.cpp Node.cpp Animal.cpp Driver.cpp Herbivore.cpp
 
 int main()
 {

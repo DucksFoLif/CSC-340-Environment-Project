@@ -84,6 +84,7 @@ void LinkedList::addAnimal(Animal* animal) {
             newNode->setPrev(tail);
         }
     }
+    size++;
 }
 
 
