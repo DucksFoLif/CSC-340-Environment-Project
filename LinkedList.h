@@ -22,6 +22,7 @@ public:
     void setHead(Node* toSet);
     void setTail(Node* toSet);
     int getSize();
+    std::string getSpeciesName() const;
     void addAnimal(Animal* animal);
     void removeAnimal(Animal* animal);
 };

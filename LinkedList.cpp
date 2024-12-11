@@ -13,6 +13,7 @@ LinkedList::LinkedList(){
 LinkedList::LinkedList(const std::string& speciesName){
     //read in csv
     //make animals equivalent to value
+    this->speciesName = speciesName;
 }
 
 LinkedList::~LinkedList(){
@@ -41,6 +42,10 @@ void LinkedList::setTail(Node* toSet){
 
 int LinkedList::getSize(){
     return size;
+}
+
+string LinkedList::getSpeciesName() const{
+    return speciesName;
 }
 
 void LinkedList::addAnimal(Animal* animal){

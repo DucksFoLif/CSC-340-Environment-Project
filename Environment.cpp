@@ -126,6 +126,8 @@ void Environment::printSummary()
   cout << "The current min temperature is: " << tempMin << "\n";
   cout << "The current max temperature is: " << tempMax << "\n";
   //Eventually will add the LinkedList of certain animals
+  cout << "\n The current animals in the environment are: \n";
+  cout << population->getSize() << " " << population->getSpeciesName() << endl;
   for (int i = 0; i < 20; i++) cout <<"-";
   cout << endl;
   //FIX ME
@@ -144,8 +146,8 @@ string Environment::parseSeason(int dayOfYear){
 
 }
 
-void Environment::addPopulation(int numToAdd, int* givenStats){
-  population = new LinkedList();
+void Environment::addPopulation(string& speciesName, int numToAdd, int* givenStats){
+  population = new LinkedList(speciesName);
   for(int i = 0; i < numToAdd; i++){
     Animal* ani = new Animal(givenStats);
     population->addAnimal(ani);
