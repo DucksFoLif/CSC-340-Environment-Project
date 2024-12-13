@@ -84,7 +84,7 @@ double Herbivore::eat(double foodLeft)
 
     }
    }
-   //return changes to environment
+    //return changes to environment
     return foodLeft;
 }
 
