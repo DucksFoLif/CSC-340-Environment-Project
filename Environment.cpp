@@ -33,8 +33,8 @@ Environment::Environment(string environmentType, int foodLevel, double tempMin, 
     this -> currentFoodLevel = foodLevel;
     this -> tempMin = tempMin;
     this -> tempMax = tempMax;
-
-    this -> population = new LinkedList("Herbivore");
+  /*
+    
 
     //TEST DELETE LATER
     {
@@ -46,12 +46,13 @@ Environment::Environment(string environmentType, int foodLevel, double tempMin, 
     population -> addAnimal(one);
     population -> addAnimal(two);
     //TEST DELETE LATER
-
+  */
 }
 
 Environment::~Environment()
 {
   //eventually loop through and delete all animals
+
 
 }
 
@@ -79,8 +80,7 @@ void Environment::dayPasses(bool print){ //very important function, split into 4
 
     //TEST DELETE LATER
     //animals eat
-    setCurrentFoodLevel(one -> eat(getCurrentFoodLevel()));
-    setCurrentFoodLevel(two -> eat(getCurrentFoodLevel()));
+    
 
     //food replenishes
     if ((getCurrentFoodLevel() * 1.4 + 10) < getMaxFoodLevel()) setCurrentFoodLevel(getCurrentFoodLevel() *1.5 + 20);
@@ -157,11 +157,11 @@ string Environment::parseSeason(int dayOfYear){
 }
 
 void Environment::addPopulation(string& speciesName, int numToAdd, int* givenStats){
-  population = new LinkedList(speciesName);
+  this -> population = new LinkedList(speciesName);
 
   Animal* ani = nullptr;
   for(int i = 1; i < numToAdd; i++){
     ani = new Animal(givenStats);
-    population->addAnimal(ani);
+    (this -> population) -> addAnimal(ani);
   }
 }

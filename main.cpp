@@ -22,5 +22,6 @@ int main()
   string animalName = "Deer";
   chosen_environment -> addPopulation(animalName, 3, defaultStats);
 
+  //at this point environment has a population, and animals inside it
   Driver::initiateMenu(chosen_environment);
 }

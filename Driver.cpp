@@ -39,8 +39,8 @@ void Driver::parseMenuInput(Environment* Enviro, int inp){
             cout << "Coming soon!" << endl;
             break;
         case SIMULATE:
-            Enviro->dayPasses(true);
-            //Eventually add a function that asks the user how many days to run, and then runs that many days
+            // function that starts a certain amount of days
+            Driver::initiateSimulater(Enviro);
             break;
         case YEAR:
             for(int i = 0; i < 60; i++){
@@ -95,4 +95,20 @@ Environment* Driver::chooseEnvironment()
 void Driver::initiateAddNewSpecies(Environment* Enviro)
 {
     //Enviro -> addPopulation();
+}
+
+void Driver::initiateSimulater(Environment* Enviro)
+{
+    cout << "How many days would you like to Simulate: ";
+
+    int daysChosen = 0;
+    cin >> daysChosen;
+
+    for(int i = 0; i < daysChosen; i++)
+    {
+        Enviro -> dayPasses(true);
+        cout << "Press enter to go to next day:";
+        cin.get();
+    }
+
 }
