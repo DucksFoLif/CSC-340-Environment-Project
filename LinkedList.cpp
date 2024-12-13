@@ -4,10 +4,10 @@
 using namespace std;
 
 LinkedList::LinkedList(){
-    head = nullptr;
-    tail = nullptr;
-    size = 0;
-    speciesName = "defaultSpecies";
+    this -> head = nullptr;
+    this -> tail = nullptr;
+    this -> size = 0;
+    this -> speciesName = "defaultSpecies";
 }
 
 LinkedList::LinkedList(const std::string& speciesName){
@@ -28,10 +28,10 @@ LinkedList::~LinkedList(){
 }
 
 Node* LinkedList::getHead() const{
-    return head;
+    return this -> head;
 }
 Node* LinkedList::getTail() const{
-    return tail;
+    return this -> tail;
 }
 void LinkedList::setHead(Node* toSet){
     this->head = toSet;
@@ -41,7 +41,7 @@ void LinkedList::setTail(Node* toSet){
 }
 
 int LinkedList::getSize(){
-    return size;
+    return this -> size;
 }
 
 string LinkedList::getSpeciesName() const{
@@ -65,6 +65,7 @@ void LinkedList::addAnimal(Animal* animal) {
                 if (prevNode) prevNode->setNext(newNode);
                 temp->setPrev(newNode);
             }
+            (this -> size)++;
             return;  // Stop after inserting
         }
         temp = temp->getNext();
@@ -83,8 +84,9 @@ void LinkedList::addAnimal(Animal* animal) {
             tail->setNext(newNode);
             newNode->setPrev(tail);
         }
+        (this -> size)++;
     }
-    size++;
+    
 }
 
 
