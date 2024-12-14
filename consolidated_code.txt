@@ -7,8 +7,6 @@
 
 using namespace std;
 
-enum Options {QUIT = 0, NEW_ENVIRO, SIMULATE, YEAR, STATS, ADD_ANIMAL, TESTER};
-
 void Driver::initiateMenu(Environment* Enviro){
     int input;
     cout << "Choose an option:\n" << 
@@ -143,6 +141,10 @@ class Tester
 #include "Driver.h"
 
 using namespace std;
+
+enum Options {QUIT = 0, NEW_ENVIRO, SIMULATE, YEAR, STATS, ADD_ANIMAL, TESTER};
+
+class Environment;
 
 class Driver
 {
@@ -329,8 +331,8 @@ public:
 // --- End of Herbivore.h ---
 
 // --- Start of Node.h ---
-#ifndef Node_H
-#define Node_H
+#ifndef NODE_H
+#define NODE_H
 
 #include <string>
 #include "Animal.h"
@@ -422,6 +424,7 @@ public:
 // --- Start of Herbivore.cpp ---
 #include <iostream>
 #include <string>
+#include <ctime>
 #include "Environment.h"
 #include "Animal.h"
 #include "Herbivore.h"
@@ -659,9 +662,7 @@ Environment::Environment(string environmentType, int foodLevel, double tempMin, 
 
 Environment::~Environment()
 {
-  //eventually loop through and delete all animals
-
-
+  delete population;
 }
 
 void Environment::dayPasses(bool print){ //very important function, split into 4 phases
@@ -948,12 +949,15 @@ double Animal::eat(double foodleft) {
 #include "Tester.h"
 #include "Node.h"
 #include "LinkedList.h"
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 //cl Main.cpp LinkedList.cpp Environment.cpp Tester.cpp Node.cpp Animal.cpp Driver.cpp Herbivore.cpp
 
 int main()
 {
+  srand(time(nullptr));
   cout << "Hello! This is a program that simulates animals living, fighting for survival, and evolving in different environments!\n" << 
           "To get Started, let's choose what type of environment you want your first animals to live in:" << endl;
   
@@ -1053,6 +1057,8 @@ void Node::setPrev(Node* prevNode) {
 #include "Herbivore.h"
 #include "LinkedList.h"
 #include "Node.h"
+
+class LinkedList;
 
 class Environment{
     private:

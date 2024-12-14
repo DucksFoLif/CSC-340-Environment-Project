@@ -4,6 +4,8 @@
 #include "Environment.h"
 #include "Animal.h"
 #include "Herbivore.h"
+#include <cstdlib>
+
 
 using namespace std;
 
