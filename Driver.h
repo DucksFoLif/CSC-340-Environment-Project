@@ -17,6 +17,7 @@ class Driver
     static void startTester();
     static Environment* chooseEnvironment();
     static void initiateAddNewSpecies(Environment* Enviro);
+    static void initiateSimulater(Environment* Enviro);
   
 };
 
