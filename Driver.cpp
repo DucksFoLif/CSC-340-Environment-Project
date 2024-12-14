@@ -84,7 +84,7 @@ Environment* Driver::chooseEnvironment()
 {    
     // finish this as an option
     cout << "Choosing Environments is in the works. We will give you a desert environment to start." << endl;
-    Environment* returnEnvironment = new Environment("desert", 15, 0.0, 35.0);
+    Environment* returnEnvironment = new Environment("desert", 150, 0.0, 35.0);
 
     return returnEnvironment;
 

@@ -87,6 +87,10 @@ void Environment::dayPasses(bool print){ //very important function, split into 4
         Animal* animal = iterator->getData();
         animal->setFullness(animal->getFullness() - HUNGER_TAKEN_PER_DAY);
 
+        //DEBUG
+        cout <<endl <<  animal -> getFullness() << endl;
+        cout << getCurrentFoodLevel() << endl;
+
         if (animal->getFullness() <= 0) {
             // Prepare to remove the current node
             Node* toDelete = iterator;
@@ -99,16 +103,13 @@ void Environment::dayPasses(bool print){ //very important function, split into 4
     
 
     //attempt to eat
-    for (int i = 0; i < (this -> population) -> getSize(); i++)
-    {
-      Node *iterator = (this -> population) -> getHead();
+      iterator = (this -> population) -> getHead();
 
       while (iterator != nullptr)
       {
         setCurrentFoodLevel((iterator -> getData()) -> eat(getCurrentFoodLevel()));
         iterator = iterator -> getNext();
       }
-    }
 
     
   
@@ -188,7 +189,7 @@ void Environment::addPopulation(string& speciesName, int numToAdd, int* givenSta
 
   Animal* ani = nullptr;
   for(int i = 0; i < numToAdd; i++){
-    ani = new Animal(givenStats);
+    ani = new Herbivore(givenStats);
     (this -> population) -> addAnimal(ani);
   }
 }

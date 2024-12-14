@@ -14,7 +14,7 @@ public:
     ~Herbivore();
     Herbivore(int *given_stats);
 
-    double eat(double foodLeft);
+    double eat(double foodLeft) override ;
 
 
 

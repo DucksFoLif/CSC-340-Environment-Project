@@ -9,7 +9,7 @@ void Tester::initiateTester()
 {
     //programmer input for default
     string environmentType = "desert";
-    int foodLevel = 15;
+    int foodLevel = 1500;
     double tempMin = 0.0;
     double tempMax = 35.0;
 
@@ -22,7 +22,7 @@ void Tester::initiateTester()
     //creating the environment to test
     Environment* test_environment = new Environment(environmentType, foodLevel, tempMin, tempMax);
 
-    int defaultStats[] = {0, 128, 128, 128, 128};
+    int defaultStats[] = {0, 255, 255, 255, 255};
 
   //change later to let the user choose from a list
   string animalName = "Deer";

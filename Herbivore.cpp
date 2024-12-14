@@ -24,7 +24,7 @@ Herbivore::Herbivore(int *given_stats) : Animal(given_stats)
 Herbivore::~Herbivore() 
 {}
 
-double Herbivore::eat(double foodLeft)
+double Herbivore::eat(double foodLeft) 
 {
     //values allocated so I don't have to repeat function calls
     double current_fullness = this -> getFullness();
@@ -39,6 +39,7 @@ double Herbivore::eat(double foodLeft)
     //calculate potential hunger and fullness values
     //double potential_fullness = this -> getFullness() + animalWant;
     //double potential_hunger = this ->getHunger() - animalWant;
+
 
     // change value and finish eating
     if(animalWant < foodLeft)// if there is enough food for the animal to eat and have some left over
@@ -59,7 +60,7 @@ double Herbivore::eat(double foodLeft)
 
         //apply hunger changes
         this -> setFullness(current_fullness + animalWant);
-        this -> setHunger(current_hunger - animalWant);
+        this -> setHunger(100.0 - (this -> getFullness()));
     }
    }
    else //there isn't enough food left for the animal to eat to get waht they want, but they still could get full
@@ -77,7 +78,7 @@ double Herbivore::eat(double foodLeft)
     {
         //apply hunger changes
         this -> setFullness(current_fullness + foodLeft);
-        this -> setHunger(current_hunger - foodLeft);
+        this -> setHunger(100.0 - (this -> getFullness()));
 
         //no food left
         foodLeft = 0;
