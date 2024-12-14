@@ -7,6 +7,10 @@
 
 using namespace std;
 
+enum Options {QUIT = 0, NEW_ENVIRO, SIMULATE, YEAR, STATS, ADD_ANIMAL, TESTER};
+
+class Environment;
+
 class Driver
 {
   //string 2ints 2 doubles

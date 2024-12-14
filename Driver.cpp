@@ -6,8 +6,6 @@
 
 using namespace std;
 
-enum Options {QUIT = 0, NEW_ENVIRO, SIMULATE, YEAR, STATS, ADD_ANIMAL, TESTER};
-
 void Driver::initiateMenu(Environment* Enviro){
     int input;
     cout << "Choose an option:\n" << 

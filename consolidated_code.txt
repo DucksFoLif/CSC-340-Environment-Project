@@ -1,0 +1,1097 @@
+// --- Start of Driver.cpp ---
+#include <iostream>
+#include <string>
+#include "Driver.h"
+#include "Environment.h"
+#include "Tester.h"
+
+using namespace std;
+
+enum Options {QUIT = 0, NEW_ENVIRO, SIMULATE, YEAR, STATS, ADD_ANIMAL, TESTER};
+
+void Driver::initiateMenu(Environment* Enviro){
+    int input;
+    cout << "Choose an option:\n" << 
+            "(" << QUIT << "): Quit the program.\n" <<
+            "(" << NEW_ENVIRO << "): Load a new Environment.\n"
+            "(" << SIMULATE << "): Simulate days of the program.\n"
+            "(" << YEAR << "): Simulate one year (60 days) of the program.\n"
+            "(" << STATS << "): View Statistics about your simulation.\n"
+            "(" << ADD_ANIMAL << "): Add An Animal Species to the environment.\n"
+            "(" << TESTER << "): Test Simulation behavior.\n" << endl;
+
+    cin >> input;
+    //print menu option and gather output
+    Driver::parseMenuInput(Enviro, input);
+    //parse menu output, call appropriate functions (when they exist), and then call initiateMenu again
+    //im not sure if this will cause issues because you keep essentially recursively calling this function
+    //if it is we can just put a loop in main to forever call this function but then this function needs to return the Environment
+
+}
+
+void Driver::parseMenuInput(Environment* Enviro, int inp){
+    switch(inp){
+        case QUIT:
+            cout << "Thank you, bye!" << endl;
+            //The check at the bottom of this function will check & terminate program if QUIT is entered
+            break;
+        case NEW_ENVIRO:
+            //Driver::loadNewEnviro;
+            cout << "Coming soon!" << endl;
+            break;
+        case SIMULATE:
+            // function that starts a certain amount of days
+            Driver::initiateSimulater(Enviro);
+            break;
+        case YEAR:
+            for(int i = 0; i < 60; i++){
+                Enviro->dayPasses(false);
+            }
+            break;
+        case STATS:
+            //Show statistics about the environment (# of animals in each LinkedList, day of year, temperatures)
+            cout << "Coming soon!" << endl;
+            break;
+        case ADD_ANIMAL:
+            //need to make the .csv, and add the function to read in from it
+            cout << "Coming soon!" << endl;
+            Driver::initiateAddNewSpecies(Enviro);
+            break;
+        case TESTER:
+            startTester();
+            break;
+
+    }
+    if(inp != QUIT){
+        Driver::initiateMenu(Enviro);
+    }
+	//if it reaches this point it should quit, so we gotta make sure we delete any dynamically allocated objects
+}
+
+void Driver::startTester()
+{
+    //initiate tester program
+    Tester *tester = new Tester;
+
+    cout << "Starting tester!\n";
+    tester -> initiateTester();
+
+    delete tester;
+    cout << "Ended Testing!\n";
+}
+
+
+Environment* Driver::chooseEnvironment()
+{    
+    // finish this as an option
+    cout << "Choosing Environments is in the works. We will give you a desert environment to start." << endl;
+    Environment* returnEnvironment = new Environment("desert", 150, 0.0, 35.0);
+
+    return returnEnvironment;
+}
+
+
+void Driver::initiateAddNewSpecies(Environment* Enviro)
+{
+    //Enviro -> addPopulation();
+}
+
+void Driver::initiateSimulater(Environment* Enviro)
+{
+    cout << "How many days would you like to Simulate: ";
+
+    int daysChosen = 0;
+    cin >> daysChosen;
+
+    for(int i = 0; i < daysChosen; i++)
+    {
+        Enviro -> dayPasses(true);
+        cout << "Press enter to go to next day:";
+        cin.get();
+    }
+
+}
+// --- End of Driver.cpp ---
+
+// --- Start of Tester.h ---
+#ifndef TESTER_H
+#define TESTER_H
+
+#include <iostream>
+#include "Environment.h"
+#include "Driver.h"
+
+class Tester
+{
+    public:
+    void initiateTester();
+    
+};
+
+
+
+
+#endif // TESTER_H
+// --- End of Tester.h ---
+
+// --- Start of Driver.h ---
+#ifndef DRIVER_H
+#define DRIVER_H
+
+#include <iostream>
+#include "Environment.h"
+#include "Driver.h"
+
+using namespace std;
+
+class Driver
+{
+  //string 2ints 2 doubles
+
+  public:
+    static void initiateMenu(Environment* Enviro);
+    static void parseMenuInput(Environment* Enviro, int inp);
+    static void startTester();
+    static Environment* chooseEnvironment();
+    static void initiateAddNewSpecies(Environment* Enviro);
+    static void initiateSimulater(Environment* Enviro);
+  
+};
+
+
+
+
+#endif // DRIVER_H
+// --- End of Driver.h ---
+
+// --- Start of LinkedList.cpp ---
+#include "LinkedList.h"
+#include <iostream>
+
+using namespace std;
+
+LinkedList::LinkedList(){
+    this -> head = nullptr;
+    this -> tail = nullptr;
+    this -> size = 0;
+    this -> speciesName = "defaultSpecies";
+}
+
+LinkedList::LinkedList(const std::string& speciesName){
+    //read in csv
+    //make animals equivalent to value
+    this->speciesName = speciesName;
+}
+
+LinkedList::~LinkedList(){
+    Node* current = head;
+    while (current) {
+        Node* toDelete = current;
+        current = current->getNext();
+        delete toDelete;
+    }
+    head = nullptr;
+    tail = nullptr;
+}
+
+Node* LinkedList::getHead() const{
+    return this -> head;
+}
+Node* LinkedList::getTail() const{
+    return this -> tail;
+}
+void LinkedList::setHead(Node* toSet){
+    this->head = toSet;
+}
+void LinkedList::setTail(Node* toSet){
+    this->tail = toSet;
+}
+
+int LinkedList::getSize(){
+    return this -> size;
+}
+
+string LinkedList::getSpeciesName() const{
+    return speciesName;
+}
+
+void LinkedList::addAnimal(Animal* animal) {
+    Node* temp = head;
+    Node* newNode = new Node(animal);
+
+    while (temp) {
+        if (animal->getEatSkill() <= temp->getData()->getEatSkill()) {
+            if (temp == head) {
+                newNode->setNext(head);
+                head->setPrev(newNode);
+                head = newNode;
+            } else {
+                Node* prevNode = temp->getPrev();
+                newNode->setNext(temp);
+                newNode->setPrev(prevNode);
+                if (prevNode) prevNode->setNext(newNode);
+                temp->setPrev(newNode);
+            }
+            (this -> size)++;
+            return;  // Stop after inserting
+        }
+        temp = temp->getNext();
+    }
+
+    // Append at the end if no suitable position was found
+    if (!temp) {
+        if (!head) {
+            // If the list is empty
+            head = newNode;
+        } else {
+            Node* tail = head;
+            while (tail->getNext()) {
+                tail = tail->getNext();
+            }
+            tail->setNext(newNode);
+            newNode->setPrev(tail);
+        }
+        (this -> size)++;
+    }
+}
+
+
+
+
+void LinkedList::removeAnimal(Animal* animal) {
+    Node* temp = head;
+
+    while (temp) {
+        if (animal == temp->getData()) {
+            if (temp == head) {
+                head = temp->getNext();
+                if (head) head->setPrev(nullptr);
+            } else if (temp == tail) {
+                tail = temp->getPrev();
+                if (tail) tail->setNext(nullptr);
+            } else {
+                temp->getNext()->setPrev(temp->getPrev());
+                temp->getPrev()->setNext(temp->getNext());
+            }
+
+            delete temp;
+            size--;
+            return;
+        }
+        temp = temp->getNext();
+    }
+}
+
+/* //OLD CODE REVERT IF NECCESSARY
+void LinkedList::removeAnimal(Animal* animal){
+    Node* temp = head;
+    while(temp){
+        if(animal == temp->getData()){
+            temp->getNext()->setPrev(temp->getPrev());
+            temp->getPrev()->setNext(temp->getNext());
+            delete temp;
+            return;
+        }
+        temp = temp->getNext();
+    }
+    
+}
+*/
+// --- End of LinkedList.cpp ---
+
+// --- Start of Herbivore.h ---
+#ifndef HERBIVORE_H
+#define HERBIVORE_H
+
+#include <string>
+#include "Animal.h"
+
+class Herbivore : public Animal
+{
+private:
+
+
+public:
+    Herbivore();
+    ~Herbivore();
+    Herbivore(int *given_stats);
+
+    double eat(double foodLeft) override ;
+
+
+
+};
+
+
+
+
+#endif // HERBIVORE_H
+// --- End of Herbivore.h ---
+
+// --- Start of Node.h ---
+#ifndef Node_H
+#define Node_H
+
+#include <string>
+#include "Animal.h"
+#include "Herbivore.h"
+
+class Node {
+private:
+    Animal* data;
+    Node* next;
+    Node* prev;
+
+public:
+    Node(Animal* data);
+    Node();
+    ~Node();
+    Animal* getData() const;
+    void setData(Animal* newdata);
+    Node* getNext() const;
+    void setNext(Node* nextNode);
+    Node* getPrev() const;
+    void setPrev(Node* prevNode);
+};
+
+#endif
+// --- End of Node.h ---
+
+// --- Start of Animal.h ---
+#ifndef ANIMAL_H
+#define ANIMAL_H
+
+#include <string>
+
+class Animal
+{
+protected:
+    //given from uml
+    std::string EPstr;
+    int EPlevel;
+    int hungerReq;
+    std::string state;
+    // bool sex;
+    
+
+    //can be removed if we don't like it
+    double hunger; // inverse of fullness starts at 0
+    double fullness; //starts at 100
+    unsigned short int* stats; // Stealth/Evasion, Eating, Intelligence, Appeal (Mating stat)
+    
+
+public:
+    Animal();
+    Animal(const int *given_stats);
+    virtual ~Animal();
+
+    
+
+    //get base stats
+    int getStealthSkill();
+    int getEatSkill();
+    int getIntelligence();
+    int getAppealSkill();
+
+    //set base stats
+    
+
+    //get hunger stats
+    double getHunger();
+    double getFullness();
+
+    //set hunger stats
+    void setHunger(double newHunger);
+    void setFullness(double newFullness);
+
+    //reproduction
+    Animal* reproduce();
+
+    //eating
+    virtual double eat(double foodleft);
+
+    
+};
+
+
+
+
+#endif // ANIMAL_H
+// --- End of Animal.h ---
+
+// --- Start of Herbivore.cpp ---
+#include <iostream>
+#include <string>
+#include "Environment.h"
+#include "Animal.h"
+#include "Herbivore.h"
+
+using namespace std;
+
+const int MAX_STAT_SIZE = 4 ;
+const int RANDOM_RANGE = 100;
+
+
+Herbivore::Herbivore() : Animal() 
+{}
+
+Herbivore::Herbivore(int *given_stats) : Animal(given_stats)
+{
+
+    
+}
+
+
+
+Herbivore::~Herbivore() 
+{}
+
+double Herbivore::eat(double foodLeft) 
+{
+    //values allocated so I don't have to repeat function calls
+    double current_fullness = this -> getFullness();
+    double current_hunger = this -> getHunger();
+
+    //calculate luck
+    int randomMult = 1 + (rand() % RANDOM_RANGE); 
+
+    //calculate how much food the animal attempts to eat
+    double animalWant = current_hunger * (5.0 / randomMult) * ((this -> getEatSkill() + 1) / 256.0);
+
+    //calculate potential hunger and fullness values
+    //double potential_fullness = this -> getFullness() + animalWant;
+    //double potential_hunger = this ->getHunger() - animalWant;
+
+
+    // change value and finish eating
+    if(animalWant < foodLeft)// if there is enough food for the animal to eat and have some left over
+    {
+     if((current_fullness + animalWant) >= 100) //the animal would be too full or full
+     {
+        //calculate food left after eating 
+        foodLeft -= (animalWant + current_fullness - 100.0);
+
+        //apply hunger changes
+        this -> setFullness(100.0);
+        this ->setHunger(0.0);
+    }
+    else // if the animal won't be full enough but there is food left over
+    {
+        //calculate food left after eating
+        foodLeft -= animalWant;
+
+        //apply hunger changes
+        this -> setFullness(current_fullness + animalWant);
+        this -> setHunger(100.0 - (this -> getFullness()));
+    }
+   }
+   else //there isn't enough food left for the animal to eat to get waht they want, but they still could get full
+   {
+    if((current_fullness + foodLeft) >= 100) //animal would be full from eating what is left 
+    {
+        //calculate food left after eating
+        foodLeft = (foodLeft + current_fullness - 100.0);
+
+        //apply hunger changes
+        this -> setFullness(100.0);
+        this ->setHunger(0.0);
+    }
+    else //if the animal wouldn't be full from eating whats left and there isn't enough food
+    {
+        //apply hunger changes
+        this -> setFullness(current_fullness + foodLeft);
+        this -> setHunger(100.0 - (this -> getFullness()));
+
+        //no food left
+        foodLeft = 0;
+
+    }
+   }
+    //return changes to environment
+    return foodLeft;
+}
+
+
+// --- End of Herbivore.cpp ---
+
+// --- Start of Tester.cpp ---
+#include <iostream>
+#include <string>
+#include "Tester.h"
+#include "Environment.h"
+#include "Herbivore.h"
+using namespace std;
+
+void Tester::initiateTester()
+{
+    //programmer input for default
+    string environmentType = "desert";
+    int foodLevel = 1500;
+    double tempMin = 0.0;
+    double tempMax = 35.0;
+
+    // Display the initialization details to the user
+    cout << "Initiating Environment with:\n";
+    cout << "Environment Type: " << environmentType << "\n";
+    cout << "Food Level: " << foodLevel << "\n";
+    cout << "Temperature Range: " << tempMin << " to " << tempMax << " degrees Celsius\n";
+
+    //creating the environment to test
+    Environment* test_environment = new Environment(environmentType, foodLevel, tempMin, tempMax);
+
+    int defaultStats[] = {0, 255, 255, 255, 255};
+
+  //change later to let the user choose from a list
+  string animalName = "Deer";
+    test_environment -> addPopulation(animalName, 3, defaultStats);
+
+
+ //basically main
+    //any functions in here should return here when finished and eventually complete this function ending the test
+
+    //display correctly copied values!
+    cout << "\nInitial State of Environment:\n";
+    cout << "Expected: Day 15, Min Temp 0, Max Temp 35" << endl;
+    test_environment->printSummary();
+
+    //test getMaxFoodLevel()
+    cout << "\nTesting getMaxFoodLevel():\n";
+    cout << "Expected: 15\n";
+    cout << "Max Food Level: " << test_environment->getMaxFoodLevel() << "\n";
+
+    //test getCurrentFoodLevel()
+    cout << "\nTesting getCurrentFoodLevel():\n";
+    cout << "Expected: 15\n";
+    cout << "Current Food Level: " << test_environment->getCurrentFoodLevel() << "\n";
+
+    //test subtractFoodLevel()
+    cout << "\nTesting subtractFoodLevel():\n";
+    cout << "Subtracting 5.0 units of food...\n";
+    test_environment->subtractFoodLevel(5.0);
+    cout << "Expected: 10\n";
+    cout << "Current Food Level: " << test_environment->getCurrentFoodLevel() << "\n";
+
+    //test dayPasses() with print enabled
+    cout << "\nTesting dayPasses() with detailed output:\n";
+    cout << "Expected: Day 16, Min 0.5, Max 35.5\n";
+    test_environment->dayPasses(true);
+
+    //test getCurrentFoodLevel()
+    cout << "\nTesting getCurrentFoodLevel():\n";
+    cout << "No Expected Value\n";
+    cout << "Current Food Level: " << test_environment->getCurrentFoodLevel() << "\n";
+
+    //test parseSeason()
+    cout << "\nTesting parseSeason():\n";
+    int testDay = 10;
+    cout << "Expected: Late Winter\n";
+    cout << "Season on day " << testDay << ": " << Environment::parseSeason(testDay) << "\n";
+
+    //test advancing multiple days
+    cout << "\nTesting multiple days passing:\n";
+    for (int i = 0; i < 5; i++) {
+        test_environment->dayPasses(false); // Advance a day without printing
+    }
+    cout << "State after advancing 5 days:\n";
+    cout << "Expected: Day 21, Min 3, Max 38\n";
+    test_environment->printSummary();
+
+    //test advancing one year
+    cout << "\nTesting advancing one year:\n";
+    cout << "Expected: Day 21, Min 3, Max 38\n";
+    for(int i = 0; i < 60; i++){
+        test_environment->dayPasses(false);
+    }
+    test_environment->printSummary();
+
+
+    //everything after this should be after test functions have finished, execution can leave this function but should return back 
+
+    //clean up memory
+    delete test_environment;
+
+    cout << "Tests have been completed!\n";
+}
+// --- End of Tester.cpp ---
+
+// --- Start of Environment.cpp ---
+#include <iostream>
+#include <string>
+#include "Environment.h"
+#include "LinkedList.h"
+#include "Node.h"
+
+
+using namespace std; //thank you 
+
+const int HUNGER_TAKEN_PER_DAY = 3;
+
+/*std::string name; //"desert" "forest" etc.
+        int dayOfYear; //1-120 (30/season)
+        int maxFoodLevel; //1-100
+        double currentFoodLevel; //1-100
+        int naturalCamo; //1-100
+        double tempMin; //celsius ish
+        double tempMax; //celsius ish*/
+
+Environment::Environment() {
+    this -> name = "default environment";
+    this -> dayOfYear = 15;
+    this -> maxFoodLevel = 50;
+    this -> currentFoodLevel = maxFoodLevel;
+    this -> naturalCamo = 0;
+    this -> tempMin = 0;
+    this -> tempMax = 10;
+
+    this -> population = new LinkedList();
+}
+
+// Environment::Environment(string templateId){} //write later to take string from a predetermined .txt file and use that 
+
+Environment::Environment(string environmentType, int foodLevel, double tempMin, double tempMax){
+    this -> name = environmentType;
+    this -> dayOfYear = 15;
+    this -> maxFoodLevel = foodLevel;
+    this -> currentFoodLevel = foodLevel;
+    this -> tempMin = tempMin;
+    this -> tempMax = tempMax;
+}
+
+Environment::~Environment()
+{
+  //eventually loop through and delete all animals
+
+
+}
+
+void Environment::dayPasses(bool print){ //very important function, split into 4 phases
+    //Print parameter will print everything about the day, logs of everything that happen. Most useful when only iterating over 1 day
+    //When iterating over multiple days at a time, print should be false
+
+    //Phase 1: Environment Changes
+    dayOfYear++;
+    
+    if(dayOfYear > 60){ dayOfYear = 1; } //Resets year
+
+    string season = parseSeason(dayOfYear);
+
+    if(season == "Early Winter"){tempMin--; tempMax--;} //early winter decreases both by 1 per day
+    //Mid Winter does not incriment temperature
+    if(season == "Late Winter"){tempMin++; tempMax++;} //late winter increases both by 1 per day
+    if(season == "Spring"){tempMin+=0.5; tempMax+=0.5;} //spring increases both by 0.5 per day
+    if(season == "Early Summer"){tempMax++; tempMin+=0.5;} //early summer increases max by 1 and min by 0.5 per day
+    //Mid Summer does not incriment temperature
+    if(season == "Late Summer"){tempMax--; tempMin-=0.5;} //late summer decreases max by 1 and min by 0.5 per day
+    if(season == "Autumn"){tempMax-=0.5; tempMin-=0.5;} //autumn decreases both by 0.5 per day
+
+    //Phase 2: Grazing Phase
+
+    //TEST DELETE LATER
+    
+
+    //food replenishes
+    if ((getCurrentFoodLevel() * 1.4 + 10) < getMaxFoodLevel()) setCurrentFoodLevel(getCurrentFoodLevel() *1.5 + 20);
+    else setCurrentFoodLevel(getMaxFoodLevel()); 
+    
+    //TEST DELETE LATER
+    //Part 1: Organize list based on priority'
+
+    //subtract food from each animal and check if dead
+      Node *iterator = ((this -> population) -> getHead());
+
+      while (iterator != nullptr) 
+      {
+        Animal* animal = iterator->getData();
+        animal->setFullness(animal->getFullness() - HUNGER_TAKEN_PER_DAY);
+
+        //DEBUG
+        cout <<endl <<  animal -> getFullness() << endl;
+        cout << getCurrentFoodLevel() << endl;
+
+        if (animal->getFullness() <= 0) {
+            // Prepare to remove the current node
+            Node* toDelete = iterator;
+            iterator = iterator->getNext();  // Advance the iterator before deletion
+            this->population->removeAnimal(toDelete->getData());
+        } else {
+            iterator = iterator->getNext();  // Move to the next node
+        }
+    }
+    
+
+    //attempt to eat
+      iterator = (this -> population) -> getHead();
+
+      while (iterator != nullptr)
+      {
+        setCurrentFoodLevel((iterator -> getData()) -> eat(getCurrentFoodLevel()));
+        iterator = iterator -> getNext();
+      }
+
+    
+  
+
+
+    //Part 2: Run Individual grazing checks for each animal?
+
+    //Part 3: Decrement the food supply to reflect
+    
+    //Phase 3: Hunting Phase
+    //Part 1: Organize list based on priority
+    //Part 2: Figure out which animals are hungry
+    //Part 3: Run hunting checks for said animals
+
+    //Phase 4: Reproduction Phase
+    Node* temp;
+    temp = population->getHead();
+    while(temp){
+      if((rand()%10000) + temp->getData()->getAppealSkill() >= 9990){
+        cout << "Something has reproduced!!\n";
+        population->addAnimal(temp->getData()->reproduce());
+      }
+      temp = temp->getNext();
+    }
+    
+    if (print == true)
+    {
+      this -> printSummary();
+    }
+}
+
+
+int Environment::getMaxFoodLevel() const{
+    return maxFoodLevel;
+}
+
+void Environment::setCurrentFoodLevel(double newLevel)
+{
+  this -> currentFoodLevel = newLevel;
+}
+
+double Environment::getCurrentFoodLevel() const{
+    return currentFoodLevel;
+}
+
+void Environment::subtractFoodLevel(double amount){
+    this->currentFoodLevel = this->currentFoodLevel - amount;
+}
+
+int Environment::getCurrentDayOfYear() const
+{
+  return dayOfYear;
+}
+
+void Environment::printSummary()
+{
+  for (int i = 0; i < 20; i++) cout <<"-";
+  cout <<"\nThe current day is: " << this -> getCurrentDayOfYear() << "\n";
+  cout << "The current min temperature is: " << tempMin << "\n";
+  cout << "The current max temperature is: " << tempMax << "\n";
+  //Eventually will add the LinkedList of certain animals
+  cout << "\nThe current animals in the environment are: \n";
+  cout << (this -> population) -> getSize() << " " << (this -> population)->getSpeciesName() << "(s)" << endl;
+  for (int i = 0; i < 20; i++) cout <<"-";
+  cout << endl;
+  //FIX ME
+}
+
+string Environment::parseSeason(int dayOfYear){
+  if(dayOfYear < 7){return "Early Winter";} //Days 1-6
+    else if(dayOfYear > 6 && dayOfYear < 10){return "Mid Winter";} //Days 7-9
+    else if(dayOfYear > 9 && dayOfYear < 16){return "Late Winter";} //Days 10-15
+    else if(dayOfYear > 15 && dayOfYear < 31){return "Spring";} //Days 16-30
+    else if(dayOfYear > 30 && dayOfYear < 37){return "Early Summer";} //Days 31-36
+    else if(dayOfYear > 36 && dayOfYear < 40){return "Mid Summer";} //Days 37-39
+    else if(dayOfYear > 39 && dayOfYear < 46){return "Late Summer";} //Days 40-45
+    else if(dayOfYear > 45){return "Autumn";} //Days 46-60
+    return "You should never get this value";
+}
+
+void Environment::addPopulation(string& speciesName, int numToAdd, int* givenStats){
+  if (this->population) {
+    delete this->population;
+  }
+  this -> population = new LinkedList(speciesName);
+
+  Animal* ani = nullptr;
+  for(int i = 0; i < numToAdd; i++){
+    ani = new Herbivore(givenStats);
+    (this -> population) -> addAnimal(ani);
+  }
+}
+// --- End of Environment.cpp ---
+
+// --- Start of Animal.cpp ---
+#include <iostream>
+#include <string>
+#include <ctime>
+#include <stdlib.h> //rand
+
+//#include "Environment.h"
+#include "Animal.h"
+
+using namespace std;
+
+const int MAX_STAT_SIZE = 5;
+
+
+Animal::Animal()
+{
+    //given stats
+    this -> EPstr = "";
+    this -> EPlevel = -1;
+    this -> hungerReq = -1;
+    this -> state = "";
+    // this -> sex = false;
+
+    //new stuff for stats
+    //declaring an array of MAX_STAT_SIZE
+    this -> stats = new short unsigned int[MAX_STAT_SIZE];
+
+    //this is unrolled for performance reasons, it would be a loop otherwise
+    this -> stats[0] = 0;
+    this -> stats[1] = 0;
+    this -> stats[2] = 0;
+    this -> stats[3] = 0;
+}
+Animal::Animal(const int *given_stats)
+{
+    //given stats
+    this -> EPstr = "";
+    this -> EPlevel = -1;
+    this -> hungerReq = -1;
+    this -> state = "";
+
+    //declaring an array of MAX_STAT_SIZE
+    this -> stats = new short unsigned int[MAX_STAT_SIZE];
+
+    this -> stats[0] = given_stats[0];  //Herbivore/carnivore
+    this -> stats[1] = given_stats[1];  // Stealth/Evasion
+    this -> stats[2] = given_stats[2];  // Eating
+    this -> stats[3] = given_stats[3];  // Intelligence
+    this -> stats[4] = given_stats[4];  // Appeal
+
+    //setting hunger stats
+    hunger = 50; fullness = 50;
+
+    /*
+    //determining sex
+    if (std::time(nullptr) % 2 == 0)
+    {
+        this -> sex = true;
+    }
+
+    else this -> sex = false;
+    */
+
+}
+Animal::~Animal()
+{
+    delete[] stats;
+}
+
+
+
+int Animal::getEatSkill()
+{return (this -> stats)[2];}
+int Animal::getAppealSkill()
+{return (this -> stats)[4];}
+
+
+double Animal::getHunger()
+{return this -> hunger;}
+double Animal::getFullness()
+{return this -> fullness;}
+
+
+void Animal::setHunger(double newHunger)
+{this -> hunger = newHunger;}
+void Animal::setFullness(double newFullness)
+{this -> fullness = newFullness;}
+
+
+Animal* Animal::reproduce(){
+    int newStats[MAX_STAT_SIZE];
+    int randNum = rand() % 4;
+    for (int i = 0; i < MAX_STAT_SIZE; i++) {
+        newStats[i] = stats[i]; // Assuming `stats` is the parent's stats array.
+    }
+    for (int i = 0; i < randNum; i++) {
+        int decreaseIndex = rand() % MAX_STAT_SIZE;
+        int increaseIndex = rand() % MAX_STAT_SIZE;
+
+        // Ensure we do not decrease below zero or increase above 256
+        if (newStats[decreaseIndex] > 0) {
+            newStats[decreaseIndex]--;
+            if (newStats[increaseIndex] < 255) {
+                newStats[increaseIndex]++;
+            } else {
+                newStats[decreaseIndex]++; // Revert decrease if increase can't happen.
+            }
+        }
+    }
+    Animal* newAni = new Animal(newStats);
+    return newAni;
+}
+
+double Animal::eat(double foodleft) {
+    // Default implementation for base class
+    return foodleft;
+}
+// --- End of Animal.cpp ---
+
+// --- Start of main.cpp ---
+#include <iostream>
+#include "Driver.h"
+#include "Environment.h"
+#include "Animal.h"
+#include "Tester.h"
+#include "Node.h"
+#include "LinkedList.h"
+using namespace std;
+
+//cl Main.cpp LinkedList.cpp Environment.cpp Tester.cpp Node.cpp Animal.cpp Driver.cpp Herbivore.cpp
+
+int main()
+{
+  cout << "Hello! This is a program that simulates animals living, fighting for survival, and evolving in different environments!\n" << 
+          "To get Started, let's choose what type of environment you want your first animals to live in:" << endl;
+  
+  Environment* chosen_environment = Driver::chooseEnvironment();
+
+  int defaultStats[] = {0, 128, 128, 128, 128};
+
+  //change later to let the user choose from a list
+  //crashes before this
+  string animalName = "Deer";
+  chosen_environment -> addPopulation(animalName, 3, defaultStats);
+
+  //at this point environment has a population, and animals inside it
+  Driver::initiateMenu(chosen_environment);
+}
+// --- End of main.cpp ---
+
+// --- Start of LinkedList.h ---
+#ifndef LinkedList_H
+#define LinkedList_H
+
+#include <string>
+#include "Node.h"
+
+class LinkedList {
+private:
+    Node* head;
+    Node* tail;
+    int size;
+    std::string speciesName;
+
+public:
+    LinkedList(const std::string& speciesName);
+    LinkedList();
+    ~LinkedList();
+    Node* getHead() const;
+    Node* getTail() const;
+    void setHead(Node* toSet);
+    void setTail(Node* toSet);
+    int getSize();
+    std::string getSpeciesName() const;
+    void addAnimal(Animal* animal);
+    void removeAnimal(Animal* animal);
+};
+
+#endif
+// --- End of LinkedList.h ---
+
+// --- Start of Node.cpp ---
+#include "Node.h"
+
+using namespace std;
+
+Node::Node(Animal* data){
+    this->data = data;
+    this->next = nullptr;
+    this->prev = nullptr;
+}
+Node::Node(){
+   this->data = new Animal();
+   this->next = nullptr;
+   this->prev = nullptr;
+}
+
+Node::~Node() {}
+
+Animal* Node::getData() const {
+    return data;
+}
+
+void Node::setData(Animal* newdata) {
+    this -> data = newdata;
+}
+
+Node* Node::getNext() const {
+    return next;
+}
+
+void Node::setNext(Node* nextNode) {
+    next = nextNode;
+}
+
+Node* Node::getPrev() const {
+    return prev;
+}
+
+void Node::setPrev(Node* prevNode) {
+    prev = prevNode;
+}
+// --- End of Node.cpp ---
+
+// --- Start of Environment.h ---
+#ifndef ENVIRONMENT_H
+#define ENVIRONMENT_H
+
+#include <string>
+#include "Herbivore.h"
+#include "LinkedList.h"
+#include "Node.h"
+
+class Environment{
+    private:
+        LinkedList* population;
+        std::string name; //"desert" "forest" etc.
+        int dayOfYear; //1-120 (30/season)
+        int maxFoodLevel; //1-100
+        double currentFoodLevel; //1-100
+        int naturalCamo; //1-100
+        double tempMin; //celsius ish
+        double tempMax; //celsius ish
+
+        //create test animals in environment //CHANGE LATER BC THIS ISNT HOW ENVIRONMENTS WILL FUNCTION
+        
+        Herbivore *one;
+        Herbivore *two;
+        //TEST DELETE LATER
+
+    public:
+
+        Environment();
+        // Environment(std::string templateId);
+        Environment(std::string environmentType, int foodLevel, double tempMin, double tempMax);
+        ~Environment();
+        int getMaxFoodLevel() const;
+        void setCurrentFoodLevel(double newLevel);
+        double getCurrentFoodLevel() const;
+        void subtractFoodLevel(double amount);
+        int getCurrentDayOfYear() const;
+        void addPopulation(std::string& speciesName, int numToAdd, int* givenStats);
+        //not sure which other attributes we will need getters and setters for yet, perhaps add as needed
+        
+        void dayPasses(bool print); //basic method to iterate a day in the simulation
+        void printSummary(); //prints day of year, temp, summary of animal LinkedLists
+        static std::string parseSeason(int dayOfYear); //takes a number and returns a season
+        void findPriorityToEat();
+        //void addLinkedList(LinkedList pop); //add a new animal LinkedList (commented until LinkedList is created)
+};
+
+#endif // ENVIONMENT_H
+// --- End of Environment.h ---
+

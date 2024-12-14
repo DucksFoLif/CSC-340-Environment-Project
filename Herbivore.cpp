@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <ctime>
 #include "Environment.h"
 #include "Animal.h"
 #include "Herbivore.h"

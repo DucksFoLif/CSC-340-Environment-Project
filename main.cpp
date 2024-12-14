@@ -5,12 +5,15 @@
 #include "Tester.h"
 #include "Node.h"
 #include "LinkedList.h"
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 //cl Main.cpp LinkedList.cpp Environment.cpp Tester.cpp Node.cpp Animal.cpp Driver.cpp Herbivore.cpp
 
 int main()
 {
+  srand(time(nullptr));
   cout << "Hello! This is a program that simulates animals living, fighting for survival, and evolving in different environments!\n" << 
           "To get Started, let's choose what type of environment you want your first animals to live in:" << endl;
   

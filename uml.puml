@@ -1,0 +1,98 @@
+@startuml
+
+' Classes and their attributes/methods
+class Driver {
+    + static void initiateMenu(Environment* Enviro)
+    + static void parseMenuInput(Environment* Enviro, int inp)
+    + static void startTester()
+    + static Environment* chooseEnvironment()
+    + static void initiateAddNewSpecies(Environment* Enviro)
+    + static void initiateSimulater(Environment* Enviro)
+}
+
+class Tester {
+    + void initiateTester()
+}
+
+class LinkedList {
+    - Node* head
+    - Node* tail
+    - int size
+    - std::string speciesName
+    + Node* getHead() const
+    + Node* getTail() const
+    + void setHead(Node* toSet)
+    + void setTail(Node* toSet)
+    + int getSize()
+    + std::string getSpeciesName() const
+    + void addAnimal(Animal* animal)
+    + void removeAnimal(Animal* animal)
+}
+
+class Node {
+    - Animal* data
+    - Node* next
+    - Node* prev
+    + Animal* getData() const
+    + void setData(Animal* newdata)
+    + Node* getNext() const
+    + void setNext(Node* nextNode)
+    + Node* getPrev() const
+    + void setPrev(Node* prevNode)
+}
+
+class Animal {
+    - std::string EPstr
+    - int EPlevel
+    - int hungerReq
+    - std::string state
+    - double hunger
+    - double fullness
+    - unsigned short int* stats
+    + int getStealthSkill()
+    + int getEatSkill()
+    + int getIntelligence()
+    + int getAppealSkill()
+    + double getHunger()
+    + double getFullness()
+    + void setHunger(double newHunger)
+    + void setFullness(double newFullness)
+    + Animal* reproduce()
+    + virtual double eat(double foodleft)
+}
+
+class Herbivore {
+    + Herbivore()
+    + Herbivore(int *given_stats)
+    + ~Herbivore()
+    + double eat(double foodLeft) override
+}
+
+class Environment {
+    - LinkedList* population
+    - std::string name
+    - int dayOfYear
+    - int maxFoodLevel
+    - double currentFoodLevel
+    - int naturalCamo
+    - double tempMin
+    - double tempMax
+    + Environment()
+    + Environment(std::string environmentType, int foodLevel, double tempMin, double tempMax)
+    + ~Environment()
+    + int getMaxFoodLevel() const
+    + void setCurrentFoodLevel(double newLevel)
+    + double getCurrentFoodLevel() const
+    + void subtractFoodLevel(double amount)
+    + int getCurrentDayOfYear() const
+    + void addPopulation(std::string& speciesName, int numToAdd, int* givenStats)
+    + void dayPasses(bool print)
+    + void printSummary()
+    + static std::string parseSeason(int dayOfYear)
+}
+
+' Inheritance Relationships
+Herbivore <|-- Animal
+
+
+@enduml

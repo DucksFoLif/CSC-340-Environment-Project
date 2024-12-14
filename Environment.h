@@ -6,6 +6,8 @@
 #include "LinkedList.h"
 #include "Node.h"
 
+class LinkedList;
+
 class Environment{
     private:
         LinkedList* population;

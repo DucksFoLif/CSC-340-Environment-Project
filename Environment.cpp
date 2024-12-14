@@ -42,9 +42,7 @@ Environment::Environment(string environmentType, int foodLevel, double tempMin, 
 
 Environment::~Environment()
 {
-  //eventually loop through and delete all animals
-
-
+  delete population;
 }
 
 void Environment::dayPasses(bool print){ //very important function, split into 4 phases
