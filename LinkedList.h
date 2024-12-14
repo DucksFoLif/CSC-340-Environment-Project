@@ -4,7 +4,6 @@
 #include <string>
 #include "Node.h"
 
-class Node;
 
 class LinkedList {
 private:

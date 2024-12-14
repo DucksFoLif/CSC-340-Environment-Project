@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdlib.h> //rand
 #include "Environment.h"
 #include "Node.h"
 
@@ -100,6 +101,15 @@ void Environment::dayPasses(bool print){ //very important function, split into 4
     //Part 3: Run hunting checks for said animals
 
     //Phase 4: Reproduction Phase
+    Node* temp;
+    temp = population->getHead();
+    while(temp){
+      if((rand()%10000) + temp->getData()->getAppealSkill() >= 9990){
+        cout << "Something has reproduced!!\n";
+        population->addAnimal(temp->getData()->reproduce());
+      }
+      temp = temp->getNext();
+    }
     
     if (print == true)
     {

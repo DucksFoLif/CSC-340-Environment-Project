@@ -31,6 +31,7 @@ public:
     int getStealthSkill();
     int getEatSkill();
     int getIntelligence();
+    int getAppealSkill();
 
     //set base stats
     
