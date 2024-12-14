@@ -21,7 +21,7 @@ Environment::Environment() {
     this -> name = "default environment";
     this -> dayOfYear = 15;
     this -> maxFoodLevel = 50;
-    this -> currentFoodLevel = maxFoodLevel;
+    this -> currentFoodLevel = 50.0;
     this -> naturalCamo = 0;
     this -> tempMin = 0;
     this -> tempMax = 10;
@@ -35,9 +35,11 @@ Environment::Environment(string environmentType, int foodLevel, double tempMin, 
     this -> name = environmentType;
     this -> dayOfYear = 15;
     this -> maxFoodLevel = foodLevel;
-    this -> currentFoodLevel = foodLevel;
+    this -> currentFoodLevel = (double)foodLevel;
     this -> tempMin = tempMin;
     this -> tempMax = tempMax;
+
+    this -> population = new LinkedList();
 }
 
 Environment::~Environment()
@@ -189,9 +191,9 @@ string Environment::parseSeason(int dayOfYear){
 }
 
 void Environment::addPopulation(string& speciesName, int numToAdd, int* givenStats){
-  if (this->population) {
+  /*if (this->population) {
     delete this->population;
-  }
+  }*/
   this -> population = new LinkedList(speciesName);
 
   Animal* ani = nullptr;
