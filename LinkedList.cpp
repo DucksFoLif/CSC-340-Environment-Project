@@ -90,6 +90,33 @@ void LinkedList::addAnimal(Animal* animal) {
 }
 
 
+
+
+void LinkedList::removeAnimal(Animal* animal) {
+    Node* temp = head;
+
+    while (temp) {
+        if (animal == temp->getData()) {
+            if (temp == head) {
+                head = temp->getNext();
+                if (head) head->setPrev(nullptr);
+            } else if (temp == tail) {
+                tail = temp->getPrev();
+                if (tail) tail->setNext(nullptr);
+            } else {
+                temp->getNext()->setPrev(temp->getPrev());
+                temp->getPrev()->setNext(temp->getNext());
+            }
+
+            delete temp;
+            size--;
+            return;
+        }
+        temp = temp->getNext();
+    }
+}
+
+/* //OLD CODE REVERT IF NECCESSARY
 void LinkedList::removeAnimal(Animal* animal){
     Node* temp = head;
     while(temp){
@@ -103,3 +130,4 @@ void LinkedList::removeAnimal(Animal* animal){
     }
     
 }
+*/

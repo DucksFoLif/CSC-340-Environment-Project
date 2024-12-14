@@ -107,3 +107,8 @@ Animal* Animal::reproduce(){
     Animal* newAni = new Animal(newStats);
     return newAni;
 }
+
+double Animal::eat(double foodleft) {
+    // Default implementation for base class
+    return foodleft;
+}

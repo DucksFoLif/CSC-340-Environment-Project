@@ -46,6 +46,9 @@ public:
     //reproduction
     Animal* reproduce();
 
+    //eating
+    virtual double eat(double foodleft);
+
     
 };
 

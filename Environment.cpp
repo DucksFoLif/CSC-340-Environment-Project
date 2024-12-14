@@ -1,8 +1,13 @@
 #include <iostream>
+#include <string>
 #include "Environment.h"
+#include "LinkedList.h"
 #include "Node.h"
 
+
 using namespace std; //thank you 
+
+const int HUNGER_TAKEN_PER_DAY = 3;
 
 /*std::string name; //"desert" "forest" etc.
         int dayOfYear; //1-120 (30/season)
@@ -33,20 +38,6 @@ Environment::Environment(string environmentType, int foodLevel, double tempMin, 
     this -> currentFoodLevel = foodLevel;
     this -> tempMin = tempMin;
     this -> tempMax = tempMax;
-  /*
-    
-
-    //TEST DELETE LATER
-    {
-        int stats[5] = {0,128, 128, 128, 128};
-        this -> one =  new Herbivore(stats);
-        this -> two = new Herbivore(stats);
-    }
-
-    population -> addAnimal(one);
-    population -> addAnimal(two);
-    //TEST DELETE LATER
-  */
 }
 
 Environment::~Environment()
@@ -79,7 +70,6 @@ void Environment::dayPasses(bool print){ //very important function, split into 4
     //Phase 2: Grazing Phase
 
     //TEST DELETE LATER
-    //animals eat
     
 
     //food replenishes
@@ -87,11 +77,45 @@ void Environment::dayPasses(bool print){ //very important function, split into 4
     else setCurrentFoodLevel(getMaxFoodLevel()); 
     
     //TEST DELETE LATER
-    //Part 1: Organize list based on priority
+    //Part 1: Organize list based on priority'
+
+    //subtract food from each animal and check if dead
+      Node *iterator = ((this -> population) -> getHead());
+
+      while (iterator != nullptr) 
+      {
+        Animal* animal = iterator->getData();
+        animal->setFullness(animal->getFullness() - HUNGER_TAKEN_PER_DAY);
+
+        if (animal->getFullness() <= 0) {
+            // Prepare to remove the current node
+            Node* toDelete = iterator;
+            iterator = iterator->getNext();  // Advance the iterator before deletion
+            this->population->removeAnimal(toDelete->getData());
+        } else {
+            iterator = iterator->getNext();  // Move to the next node
+        }
+    }
+    
+
+    //attempt to eat
+    for (int i = 0; i < (this -> population) -> getSize(); i++)
+    {
+      Node *iterator = (this -> population) -> getHead();
+
+      while (iterator != nullptr)
+      {
+        setCurrentFoodLevel((iterator -> getData()) -> eat(getCurrentFoodLevel()));
+        iterator = iterator -> getNext();
+      }
+    }
+
+    
   
 
 
     //Part 2: Run Individual grazing checks for each animal?
+
     //Part 3: Decrement the food supply to reflect
     
     //Phase 3: Hunting Phase
@@ -137,8 +161,8 @@ void Environment::printSummary()
   cout << "The current min temperature is: " << tempMin << "\n";
   cout << "The current max temperature is: " << tempMax << "\n";
   //Eventually will add the LinkedList of certain animals
-  cout << "\n The current animals in the environment are: \n";
-  cout << (this -> population) -> getSize() << " " << (this -> population)->getSpeciesName() << endl;
+  cout << "\nThe current animals in the environment are: \n";
+  cout << (this -> population) -> getSize() << " " << (this -> population)->getSpeciesName() << "(s)" << endl;
   for (int i = 0; i < 20; i++) cout <<"-";
   cout << endl;
   //FIX ME
@@ -157,10 +181,13 @@ string Environment::parseSeason(int dayOfYear){
 }
 
 void Environment::addPopulation(string& speciesName, int numToAdd, int* givenStats){
+  if (this->population) {
+    delete this->population;
+  }
   this -> population = new LinkedList(speciesName);
 
   Animal* ani = nullptr;
-  for(int i = 1; i < numToAdd; i++){
+  for(int i = 0; i < numToAdd; i++){
     ani = new Animal(givenStats);
     (this -> population) -> addAnimal(ani);
   }

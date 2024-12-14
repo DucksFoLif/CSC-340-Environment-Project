@@ -22,8 +22,11 @@ void Tester::initiateTester()
     //creating the environment to test
     Environment* test_environment = new Environment(environmentType, foodLevel, tempMin, tempMax);
 
-    
+    int defaultStats[] = {0, 128, 128, 128, 128};
 
+  //change later to let the user choose from a list
+  string animalName = "Deer";
+    test_environment -> addPopulation(animalName, 3, defaultStats);
 
 
  //basically main

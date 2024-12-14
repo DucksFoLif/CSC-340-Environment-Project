@@ -13,7 +13,7 @@ void Driver::initiateMenu(Environment* Enviro){
     cout << "Choose an option:\n" << 
             "(" << QUIT << "): Quit the program.\n" <<
             "(" << NEW_ENVIRO << "): Load a new Environment.\n"
-            "(" << SIMULATE << "): Simulate one day of the program.\n"
+            "(" << SIMULATE << "): Simulate days of the program.\n"
             "(" << YEAR << "): Simulate one year (60 days) of the program.\n"
             "(" << STATS << "): View Statistics about your simulation.\n"
             "(" << ADD_ANIMAL << "): Add An Animal Species to the environment.\n"

@@ -1,9 +1,10 @@
-#ifndef NODE_H
-#define NODE_H
+#ifndef ENVIRONMENT_H
+#define ENVIRONMENT_H
 
 #include <string>
 #include "Herbivore.h"
 #include "LinkedList.h"
+#include "Node.h"
 
 class Environment{
     private:
