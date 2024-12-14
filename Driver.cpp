@@ -87,8 +87,6 @@ Environment* Driver::chooseEnvironment()
     Environment* returnEnvironment = new Environment("desert", 150, 0.0, 35.0);
 
     return returnEnvironment;
-
-
 }
 
 

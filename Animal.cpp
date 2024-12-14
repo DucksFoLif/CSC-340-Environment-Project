@@ -70,6 +70,8 @@ Animal::~Animal()
 
 int Animal::getEatSkill()
 {return (this -> stats)[2];}
+int Animal::getAppealSkill()
+{return (this -> stats)[4];}
 
 
 double Animal::getHunger()

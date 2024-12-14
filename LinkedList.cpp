@@ -86,7 +86,6 @@ void LinkedList::addAnimal(Animal* animal) {
         }
         (this -> size)++;
     }
-    
 }
 
 

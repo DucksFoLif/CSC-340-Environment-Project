@@ -1,5 +1,5 @@
-#ifndef NODE_H
-#define NODE_H
+#ifndef Node_H
+#define Node_H
 
 #include <string>
 #include "Animal.h"
