@@ -38,7 +38,7 @@ Environment::Environment(string environmentType, int foodLevel, double tempMin, 
 
     //TEST DELETE LATER
     {
-        int stats[5] = {0,128, 128, 128, 128};
+        int stats[5] = {0, 128, 128, 128, 128};
         this -> one =  new Herbivore(stats);
         this -> two = new Herbivore(stats);
     }
@@ -99,7 +99,7 @@ void Environment::dayPasses(bool print){ //very important function, split into 4
     //Part 2: Figure out which animals are hungry
     //Part 3: Run hunting checks for said animals
 
-    //Phase 4: Breeding Phase
+    //Phase 4: Reproduction Phase
     
     if (print == true)
     {

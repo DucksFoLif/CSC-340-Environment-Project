@@ -19,6 +19,7 @@ int main()
   int defaultStats[] = {0, 128, 128, 128, 128};
 
   //change later to let the user choose from a list
+  //crashes before this
   string animalName = "Deer";
   chosen_environment -> addPopulation(animalName, 3, defaultStats);
 
